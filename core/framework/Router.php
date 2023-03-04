@@ -6,6 +6,8 @@ require_once  realpath(".") . '/core/' . 'utility/getPattern.php';
 
 use function Core\Utility\getPattern;
 
+// use parseURL and parseStr
+
 class Router
 {
     private $found;
