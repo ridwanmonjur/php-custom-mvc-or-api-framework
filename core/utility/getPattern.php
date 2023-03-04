@@ -15,6 +15,11 @@ function getProtocol()
 }
 
 function compareTwoUrls($route, $routeTemplate){
+
+    $route = rtrim($route,"/");
+    $routeTemplate = rtrim($routeTemplate,"/");
+
+
     $_SAMPLE_ROUTE = "http://google.org";
     $route = $_SAMPLE_ROUTE . $route;
     $routeTemplate = $_SAMPLE_ROUTE . $routeTemplate;

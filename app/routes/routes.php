@@ -15,6 +15,8 @@ try{
     // $productController = new ProductController();
     // $productController::create();
     $router->get('/api/v1', 'ProductController@create');
+    $router->get('/api/v1/:index', 'ProductController@index');
+
   
 }
 catch (Exception $e){
