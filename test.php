@@ -1,17 +1,15 @@
 <?php
-function print_apple($apple){
-    echo "<pre>"; echo var_dump($apple); echo "</pre>";
-}
-// require_once 'core/Controller.php';
+require_once  realpath(".") . '/core/' . 'framework/Controller.php';
+require_once realpath(".") . '/print_apple.php';
 
 use Core\Framework\Controller;
 
-// $productController = new Controller();
-// $demo = ['hello', 'world'];
-// $productController->view("demo.php", $demo);
+$productController = new Controller();
+$demo = ['hello', 'world'];
+$productController->view("demo.php", $demo);
 
-// echo "<br>";
-// Controller::index();
+echo "<br>";
+Controller::index();
 
 echo "<br>";
 
@@ -31,35 +29,43 @@ $routeTemplateList = [
     "/api/v1/profile"
 ];
 
-$routeTemplateListV2= $routeTemplateList;
+
+
 foreach ($routeList as $index => $route) {
-    $_SAMPLE_ROUTE = "http://google.org";
-    $route = $_SAMPLE_ROUTE . $route;
-    $routeTemplateListV2[$index] = $_SAMPLE_ROUTE . $routeTemplateListV2[$index];
-
-    $routeParsed = parse_url($route);
-    $routeTemplateParsed = parse_url($routeTemplateListV2[$index]);
-
-    $routeUrlParams = explode("/", $routeParsed["path"]);
-    $routeTemplateParams = explode("/", $routeTemplateParsed["path"]);
-
-    $isSameNumberOfParams = sizeof($routeUrlParams) === sizeof($routeTemplateParams);
-    print_apple($isSameNumberOfParams);
-
-    // foreach ($routeParsed["path"] as $index => $path) {
-
-    // }
-    // $routeUrlParams = explode("/", $routeParsed["path"]);
-    // $routeTemplateParamas = explode("/", $routeTemplateListV2[$index]["path"]);
-
-    echo "<br>" . $index . "<br>". $route . " <br> " . $routeTemplateListV2[$index] ;
-    print_apple($routeParsed);
-    print_apple($routeTemplateParsed);
-
-    print_apple($routeUrlParams);
-    print_apple($routeTemplateParams);
-
+    $compare = compareTwoUrls($route, $routeTemplateList[$index]);
+    print_apple($compare);
 }
 
+function compareTwoUrls($route, $routeTemplate){
+        $_SAMPLE_ROUTE = "http://google.org";
+        $route = $_SAMPLE_ROUTE . $route;
+        $routeTemplate = $_SAMPLE_ROUTE . $routeTemplate;
+
+        $routeParsed = parse_url($route);
+        $routeTemplateParsed = parse_url($routeTemplate);
+
+
+        $routeUrlPathLists = explode("/", $routeParsed["path"]);
+        $routeTemplatePathLists = explode("/", $routeTemplateParsed["path"]);
+
+        $isSameNumberOfPathLists = sizeof($routeUrlPathLists) === sizeof($routeTemplatePathLists);
+      
+        $urlParams = [];
+        if ($isSameNumberOfPathLists):
+            foreach ($routeUrlPathLists as $index => $routeUrlPath) {
+                if ($routeTemplatePathLists[$index][0]==":"):
+                    $urlParams[$routeTemplatePathLists[$index]] =  $routeUrlPath;
+                else:
+                    if ($routeTemplatePathLists[$index] != $routeUrlPath):
+                        return  array("urlParams" => null, "matches" => false);
+                    endif;
+                endif;
+            }
+            return array("urlParams" => $urlParams, "matches" => true);
+        else: 
+            return  array("urlParams" => null, "matches" => false);
+        endif;
+
+}
 
 ?>

@@ -12,8 +12,9 @@ error_reporting(E_ALL);
 $router = new Router();
 
 try{
-
-    $router->get('/api/v1/', 'ProductController@index');
+    // $productController = new ProductController();
+    // $productController::create();
+    $router->get('/api/v1', 'ProductController@create');
   
 }
 catch (Exception $e){

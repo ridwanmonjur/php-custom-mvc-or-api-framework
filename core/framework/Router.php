@@ -2,9 +2,11 @@
 
 namespace Core\Framework;
 
-require_once  realpath(".") . '/core/' . 'utility/getPattern.php';
+require_once realpath(".") . '/core/' . 'utility/getPattern.php';
+require_once realpath(".") . '/print_apple.php';
 
-use function Core\Utility\getPattern;
+
+use function Core\Utility\compareTwoUrls;
 
 // use parseURL and parseStr
 
@@ -20,8 +22,9 @@ class Router
     public function get($routeName, $controllerName)
     {
         // check1: has route matched already?
-        if ($this->found) return;
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') :
+        if ($this->found)
+            return;
+        if ($_SERVER['REQUEST_METHOD'] == 'GET'):
             $this->callController($routeName, $controllerName);
         endif;
     }
@@ -29,8 +32,9 @@ class Router
     public function post($routeName, $controllerName)
     {
         // check1: has route matched already?
-        if ($this->found) return;
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') :
+        if ($this->found)
+            return;
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'):
             $this->callController($routeName, $controllerName);
         endif;
     }
@@ -38,38 +42,43 @@ class Router
     public function delete($routeName, $controllerName)
     {
         // check1: has route matched already?
-        if ($this->found) return;
-        if ($_SERVER['REQUEST_METHOD'] == 'DELETE') :
+        if ($this->found)
+            return;
+        if ($_SERVER['REQUEST_METHOD'] == 'DELETE'):
             $this->callController($routeName, $controllerName);
         endif;
     }
 
     function router($routes)
     {
-    
-}
+
+    }
     public function callController($routeName, $controllerName)
     {
-       
+
         // check1: match requestURI with routePattern
         $request = $_SERVER['REQUEST_URI'];
-        if ($request[-1] != '/')  $request = $request . '/';
-        $routePattern = getPattern($routeName);
-        $vars = [];
-        $matches = preg_match($routePattern, $request, $vars);
-        // check2: dosn't match leave immediately
-        if (!$matches) :
-            $this->found = false;
-            return;
-        endif;
+        $request = str_replace('/scandiweb-test', '', $request);
+        print_apple($request);
+        print_apple($routeName);
+
+        $hostname = realpath(".");
+        print_apple($hostname);
+
+       
+        $comparison = compareTwoUrls($request, $routeName);
+        $matches = $comparison["matches"];
+        print_apple($matches);
         // check3: update route has been found
-        $this->found = true;
-        // set route header name
-        header("Access-Control-Allow-Methods: " . $_SERVER['REQUEST_METHOD']);
-        // call controller
-        $arr = explode('@', $controllerName);
-        print_r($arr);
-        // $arr[0] = 'Src\\Core\\' . $arr[0];
-        call_user_func($arr, $controllerName);
+        if ($matches) {
+            $this->found = true;
+            // set route header name
+            header("Access-Control-Allow-Methods: " . $_SERVER['REQUEST_METHOD']);
+            // call controller
+            $arr = explode('@', $controllerName);
+            print_r($arr);
+            // $arr[0] = 'Src\\Core\\' . $arr[0];
+            call_user_func($arr, $controllerName);
+        }
     }
 }
