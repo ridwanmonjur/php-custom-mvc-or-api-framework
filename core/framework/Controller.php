@@ -1,27 +1,28 @@
 <?php
 
+namespace Core\Framework;
+
 class Controller
 {
-  
     public function view($view, $data = "")
     {
         require("app/views/$view");
     }
-
     public function model($model)
     {
         require("app/models/$model.php");
         return new $model;
     }
     static public function index(){
-        self::view("demo.php");
-        echo 'This is the the index routre'; 
+        (new self)->view("demo.php");
+        echo 'This is the default index route'; 
     }
     static public function create(){
-        self::view("demo.php");
-        echo 'This is the the create routre'; 
+        (new self)->view("demo.php");
+        echo 'This is the default create route'; 
     }
     static public function destroy(){
-        echo 'This is the the delete routre'; 
+        (new self)->view("demo.php");
+        echo 'This is the default delete route'; 
     }
 }
