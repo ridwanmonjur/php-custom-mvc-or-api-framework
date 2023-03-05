@@ -1,14 +1,6 @@
 <?php
 
-namespace Core\Framework;
-
-require_once realpath(".") . '/core/' . 'utility/getPattern.php';
-require_once realpath(".") . '/print_apple.php';
-
-
-use function Core\Utility\compareTwoUrls;
-
-// use parseURL and parseStr
+namespace Core;
 
 class Router
 {

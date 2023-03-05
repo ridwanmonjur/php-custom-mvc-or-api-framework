@@ -1,13 +1,17 @@
 <?php
 
-require_once  realpath(".") . '/core/' . 'framework/Router.php';
-require_once  realpath(".") . '/app/' . 'controllers/ProductController.php';
+// require_once  realpath(".") . '/core/' . 'framework/Router.php';
+// require_once  realpath(".") . '/app/' . 'controllers/ProductController.php';
 
-use Core\Framework\Router;
+use Core\Router;
+use Core\Controller;
 
-ini_set('display_errors', '1');
-ini_set('display_startup_errors', '1');
-error_reporting(E_ALL);
+
+
+
+$productController = new Controller();
+$demo = ['hello', 'world'];
+$productController->view("demo.php", $demo);
 
 $router = new Router();
 
