@@ -1,12 +1,10 @@
 <?php
 
 require_once 'development.php';
+require_once realpath(".") . 'vendor/autoload.php';
 
 require_once  realpath(".") . '/core/' . 'framework/Controller.php';
 require_once realpath(".") . '/print_apple.php';
-
-require_once realpath(".") . 'vendor/autoload.php';
-
 
 use Core\Controller;
 

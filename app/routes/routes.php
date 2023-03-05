@@ -1,9 +1,10 @@
 <?php
 
 // require_once  realpath(".") . '/core/' . 'framework/Router.php';
-// require_once  realpath(".") . '/app/' . 'controllers/ProductController.php';
+require_once  realpath(".") . '/app/' . 'controllers/ProductController.php';
 
 use Core\Router;
+
 
 $router = new Router();
 
