@@ -48,28 +48,16 @@ class Router
     public function callController($routeName, $controllerName)
     {
 
-        // check1: match requestURI with routePattern
         $request = $_SERVER['REQUEST_URI'];
-        $request = str_replace('/scandiweb-test', '', $request);
-        print_apple($request);
-        print_apple($routeName);
-
-        $hostname = realpath(".");
-        print_apple($hostname);
-
-       
+        // remove xamp file name
+        $request = str_replace('/scandiweb-test', '', $request);       
         $comparison = compareTwoUrls($request, $routeName);
         $matches = $comparison["matches"];
-        print_apple($matches);
-        // check3: update route has been found
         if ($matches) {
             $this->found = true;
-            // set route header name
             header("Access-Control-Allow-Methods: " . $_SERVER['REQUEST_METHOD']);
             // call controller
             $arr = explode('@', $controllerName);
-            print_r($arr);
-            // $arr[0] = 'Src\\Core\\' . $arr[0];
             call_user_func($arr, $controllerName);
         }
     }

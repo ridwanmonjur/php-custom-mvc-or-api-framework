@@ -24,15 +24,16 @@ if (!function_exists('compareTwoUrls')):
         $_SAMPLE_ROUTE = "http://google.org";
         $route = $_SAMPLE_ROUTE . $route;
         $routeTemplate = $_SAMPLE_ROUTE . $routeTemplate;
-        
+        // parse routes
         $routeParsed = parse_url($route);
         $routeTemplateParsed = parse_url($routeTemplate);
-
+        // extract route paths
         $routeUrlPathLists = array_key_exists("path", $routeParsed) ? explode("/", $routeParsed["path"]) : [];
         $routeTemplatePathLists = array_key_exists("path", $routeTemplateParsed) ? explode("/", $routeTemplateParsed["path"]) : [];
-
+        // compare path lists
         $isSameNumberOfPathLists = sizeof($routeUrlPathLists) === sizeof($routeTemplatePathLists);
-
+        // 1. extract urlParams
+        // 2. if size of pathLists is not same then comparison is
         $urlParams = [];
         if ($isSameNumberOfPathLists):
             foreach ($routeUrlPathLists as $index => $routeUrlPath) {
@@ -52,6 +53,5 @@ if (!function_exists('compareTwoUrls')):
         else:
             return array("urlParams" => null, "matches" => false);
         endif;
-
     }
 endif;

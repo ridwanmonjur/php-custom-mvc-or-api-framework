@@ -6,5 +6,8 @@
 
         },
         "files": [ "core/utility/getPattern.php", "core/utility/print_apple.php" ]
+    },
+    "require": {
+        "vlucas/phpdotenv": "^5.5"
     }
 }
