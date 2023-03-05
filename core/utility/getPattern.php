@@ -17,14 +17,14 @@ function getProtocol()
 if (!function_exists('compareTwoUrls')):
     function compareTwoUrls($route, $routeTemplate)
     {
-
+        // remove trailing slashes
         $route = rtrim($route, "/");
         $routeTemplate = rtrim($routeTemplate, "/");
-
+        // add google.org
         $_SAMPLE_ROUTE = "http://google.org";
         $route = $_SAMPLE_ROUTE . $route;
         $routeTemplate = $_SAMPLE_ROUTE . $routeTemplate;
-
+        
         $routeParsed = parse_url($route);
         $routeTemplateParsed = parse_url($routeTemplate);
 
@@ -36,17 +36,14 @@ if (!function_exists('compareTwoUrls')):
         $urlParams = [];
         if ($isSameNumberOfPathLists):
             foreach ($routeUrlPathLists as $index => $routeUrlPath) {
-                echo "<br>" . $index . "<br>";
                 if (empty($routeTemplatePathLists[$index])):
                     if (!empty($routeUrlPath[$index]))
                         return array("urlParams" => null, "matches" => false);
                     continue;
                 elseif ($routeTemplatePathLists[$index][0] == ":"):
-                    echo $routeTemplatePathLists[$index] . " : " . $routeUrlPath;
                     $urlParams[$routeTemplatePathLists[$index]] = $routeUrlPath;
                 else:
                     if ($routeTemplatePathLists[$index] != $routeUrlPath):
-                        echo $routeTemplatePathLists[$index] . " != " . $routeUrlPath;
                         return array("urlParams" => null, "matches" => false);
                     endif;
                 endif;
