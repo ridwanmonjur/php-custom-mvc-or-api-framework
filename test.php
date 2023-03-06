@@ -1,12 +1,15 @@
 <?php
 
 require_once 'development.php';
-require_once realpath(".") . 'vendor/autoload.php';
-
-require_once  realpath(".") . '/core/' . 'framework/Controller.php';
-require_once realpath(".") . '/print_apple.php';
+require_once realpath(".") . '/vendor/autoload.php';
+require_once  realpath(".") . '/app/models/' . 'Product.php';
 
 use Core\Controller;
+use Core\Orm;
+
+Orm::init();
+$model = new Orm("product");
+print_apple ( $model->findAssoc() );
 
 $productController = new Controller();
 $demo = ['hello', 'world'];
@@ -38,38 +41,6 @@ $routeTemplateList = [
 foreach ($routeList as $index => $route) {
     $compare = compareTwoUrls($route, $routeTemplateList[$index]);
     print_apple($compare);
-}
-
-function compareTwoUrls($route, $routeTemplate){
-        $_SAMPLE_ROUTE = "http://google.org";
-        $route = $_SAMPLE_ROUTE . $route;
-        $routeTemplate = $_SAMPLE_ROUTE . $routeTemplate;
-
-        $routeParsed = parse_url($route);
-        $routeTemplateParsed = parse_url($routeTemplate);
-
-
-        $routeUrlPathLists = explode("/", $routeParsed["path"]);
-        $routeTemplatePathLists = explode("/", $routeTemplateParsed["path"]);
-
-        $isSameNumberOfPathLists = sizeof($routeUrlPathLists) === sizeof($routeTemplatePathLists);
-      
-        $urlParams = [];
-        if ($isSameNumberOfPathLists):
-            foreach ($routeUrlPathLists as $index => $routeUrlPath) {
-                if ($routeTemplatePathLists[$index][0]==":"):
-                    $urlParams[$routeTemplatePathLists[$index]] =  $routeUrlPath;
-                else:
-                    if ($routeTemplatePathLists[$index] != $routeUrlPath):
-                        return  array("urlParams" => null, "matches" => false);
-                    endif;
-                endif;
-            }
-            return array("urlParams" => $urlParams, "matches" => true);
-        else: 
-            return  array("urlParams" => null, "matches" => false);
-        endif;
-
 }
 
 ?>

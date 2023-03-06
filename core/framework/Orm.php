@@ -15,6 +15,9 @@ class Orm
     static protected $db;
     static protected $table;
 
+    static protected $model;
+    static protected $class;
+
 
     //Calling Database file each time when Product model is called 
     public static function init()
@@ -32,10 +35,15 @@ class Orm
         }
     }
 
-    public function __construct(string $table, "")
+    public function __construct(string $table, string $class = "")
     {
         // $this->init();
         self::$table = $table;
+        self::$class = $class;
+        if (!empty($class)):
+            require_once(realpath(".") . "/app/models/$class.php");
+            var_dump(self::$class);
+        endif;
     }
 
     public function __destruct()
@@ -45,9 +53,21 @@ class Orm
     public static function find()
     {
         $sql = "SELECT * FROM  " . self::$table;
+        try {
+            $query = self::$db->query($sql)->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, self::$class);
+            return $query;
+        } catch (PDOException $e) {
+            $error = $e->getMessage();
+            return $error;
+        }
+    }
+
+    public static function findAssoc()
+    {
+        $sql = "SELECT * FROM  " . self::$table;
 
         try {
-            $query = self::$db->query($sql)->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE);
+            $query = self::$db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
             return $query;
         } catch (PDOException $e) {
             $error = $e->getMessage();
