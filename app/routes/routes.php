@@ -9,10 +9,9 @@ use Core\Router;
 $router = new Router();
 
 try{
-    $router->get('/api/v1', 'ProductController@create');
-    $router->get('/api/v1/:index', 'ProductController@index');
-
-  
+    $router->get('/', 'ProductController@index');
+    $router->post('/', 'ProductController@create');
+    $router->delete('/', 'ProductController@delete');
 }
 catch (Exception $e){
     echo 'Message: ' .$e->getMessage();

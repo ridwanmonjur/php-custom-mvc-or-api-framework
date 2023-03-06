@@ -21,11 +21,9 @@ class Model
         $user = $_ENV['USER'];
         $password = $_ENV['PASSWORD'];
         $dsn = "mysql:host=$host;dbname=$db;charset=UTF8";
-
         try {
             $options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION];
-            $pdo = new PDO($dsn, $user, $password, $options);
-            return $pdo;
+            self::$db = new PDO($dsn, $user, $password, $options);
         } catch (PDOException $e) {
             die($e->getMessage());
         }
@@ -78,8 +76,8 @@ class Model
             foreach ($ids as $id) {
                 $sql = "DELETE FROM product WHERE id= :id";
                 $stmt = self::$db->prepare($sql);
-                $stmt->bind(':id', $id);
-                $stmt->exec();
+                // $stmt->bind(':id', $id);
+                // $stmt->exec();
             }
             self::$db->commit();
         } catch (PDOException $e) {
