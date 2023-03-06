@@ -79,6 +79,7 @@ class Orm
     {
         $keys = implode(', ', array_keys($data));
         $values = ':' . implode(', :', array_keys($data));
+        var_dump($keys, $values);
         $table = self::$table;
         try {
             $query = self::$db->prepare("INSERT INTO $table ($keys) VALUES ($values)");
@@ -94,14 +95,28 @@ class Orm
         }
     }
 
-    public static function destroy(array $ids)
+    public static function destroy(string $id)
+    {
+        $table = self::$table;
+
+        try {
+            $sql = "DELETE FROM $table WHERE sku= :id";
+            $stmt = self::$db->prepare($sql);
+            $stmt->bind(':id', $id);
+            $stmt->exec();
+        } catch (PDOException $e) {
+            $error = $e->getMessage();
+            return $error;        }
+    }
+
+    public static function destroyMany(array $ids)
     {
         $table = self::$table;
 
         try {
             self::$db->beginTransaction();
             foreach ($ids as $id) {
-                $sql = "DELETE FROM $table WHERE id= :id";
+                $sql = "DELETE FROM $table WHERE sku= :id";
                 $stmt = self::$db->prepare($sql);
                 // $stmt->bind(':id', $id);
                 // $stmt->exec();

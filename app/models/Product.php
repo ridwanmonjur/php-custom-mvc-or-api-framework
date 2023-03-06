@@ -4,28 +4,37 @@ use Core\Model;
 
 abstract class Product extends Model
 {
-    private string $name;
-        private float $price;
-        private string $sku;
-        private string $attribute;
-        private string $type;
-    
-   
+
+    private string $tableName = "product";
+    // for initialization
+    private string $className = "book";
+
     public function __construct(
-     
-    ) {
+        private string $name,
+        private float $price,
+        private string $sku,
+        private string $attribute,
+        private string $type
+    )
+    {
         $class = get_called_class();
         print_apple($class);
-        
-        parent::__construct("product", get_called_class());
+
+        parent::__construct($this->tableName, ucfirst($this->type));
     }
 
 
     public function getAllProducts()
     {
-        return $this->db->find();
-    }
+        return $this->db->findAssoc();
     
+    }
+
+    public static function createOneProduct($body)
+    {
+        return self::$db->create($body);
+    }
+
     // public function insertProduct()
     // {
     //     $query = "INSERT INTO product 
@@ -109,4 +118,3 @@ abstract class Product extends Model
     }
 
 }
-

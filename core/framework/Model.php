@@ -2,24 +2,18 @@
 
 namespace Core;
 
-use PDO;
-use PDOException;
 use Core\Orm;
 
-// use Dotenv\Dotenv;
-
-// $dotenv = Dotenv::createImmutable(realpath("."));
-// $dotenv->load();
-
-class Model extends Orm
+abstract class Model extends Orm
 {
-    // must be static or multiple pdo classes.
 
-
-    //Calling Database file each time when Product model is called 
+    private string $tableName;
+    private string $className;
 
     public function __construct($table, $class)
     {
+        $this->table = $table;
+        $this->className = $class;
         parent::__construct($table, $class);
 
     }

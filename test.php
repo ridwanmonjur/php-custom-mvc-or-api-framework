@@ -3,12 +3,20 @@
 require_once 'development.php';
 require_once realpath(".") . '/vendor/autoload.php';
 require_once  realpath(".") . '/app/models/' . 'Product.php';
+require_once  realpath(".") . '/app/models/' . 'Book.php';
 
 use Core\Controller;
 use Core\Orm;
 
 Orm::init();
 $model = new Orm("product");
+
+// $book = new Book();
+Book::create(
+    ["sku" => "BOOK0008", "name" => "Harry Potter and the Cursed Child 2", "price" => 500, "type" => "book", "attribute"=> "20 KG"]
+
+);
+
 print_apple ( $model->findAssoc() );
 
 $productController = new Controller();

@@ -8,9 +8,9 @@ class Disc extends Product
     private string $type = "disc";
 
     public function __construct(
-        private string $name,
-        private float $price,
-        private string $sku,
+        string $name,
+        float $price,
+        string $sku,
         private int $disc
     )
     {

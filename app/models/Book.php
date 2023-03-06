@@ -8,10 +8,10 @@ class Book extends Product
     private string $type="book";
 
     public function __construct(
-        public string $name,
-        public float $price,
-        public string $sku,
-        public string $weight
+        string $name,
+        float $price,
+        string $sku,
+        private string $weight
     ) {      
         parent::__construct($name, $price, $sku, $this->getAttribute(), $this->type);
     }
