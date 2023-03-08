@@ -2,35 +2,6 @@
 <?php require_once(dirname(__FILE__) . "/../layouts/header.php"); ?>
 <script src="assets/js/deleteForm.js"> </script>
 
-<style>
-    .mx-5 {
-        margin-left: 20px;
-        margin-right: 20px;
-    }
-
-    .my-5 {
-        margin-top: 20px;
-        margin-bottom: 20px;
-    }
-
-    .px-5 {
-        padding-left: 20px;
-        padding-right: 20px;
-    }
-
-    .py-5 {
-        padding-top: 20px;
-        padding-bottom: 20px;
-    }
-
-    .min-h-full {
-        min-height: 70vh;
-        /* display: flex;
-        align-items: center;
-        justify-content: center; */
-    }
-</style>
-
 <body>
     <nav>
         <div class="nav-wrapper mx-5">
@@ -47,11 +18,12 @@
             </ul>
         </div>
     </nav>
-    <section id="body">
+    <main id="body">
 
 
         <div class="container">
-            <form id="delete_form" action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="POST" onsubmit="deleteForm(event);">
+            <form id="delete_form" action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="POST"
+                onsubmit="deleteForm(event);">
                 <div class="row min-h-full my-5 py-5">
                     <?php foreach ($data as $product): ?>
                         <div class="col s4">
@@ -80,6 +52,6 @@
                 </div>
             </form>
         </div>
-    </section>
+    </main>
 
     <?php require_once(dirname(__FILE__) . "/../layouts/footer.php"); ?>
