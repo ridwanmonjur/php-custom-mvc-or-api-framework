@@ -49,7 +49,6 @@ class ProductController extends Controller
         ('FURNITURE001', 'Read Chair chair', 20, 'furniture', '30x10x10');";
         Product::destroyMany();
         Product::exec($sql);
-        var_dump(getBaseUrl());
-        // header("Location: " . geturl());
+        echo "Reset the data";
     }
 }

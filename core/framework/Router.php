@@ -16,7 +16,7 @@ class Router
         // check1: has route matched already?
         if ($this->found)
             return;
-        if ($_SERVER['REQUEST_METHOD'] == 'GET'):
+        if ($_SERVER['REQUEST_METHOD'] === 'GET'):
             $this->callController($routeName, $controllerName);
         endif;
     }
@@ -25,7 +25,7 @@ class Router
     {
         if ($this->found)
             return;
-        if ($_SERVER['REQUEST_METHOD'] == 'POST'):
+        if ($_SERVER['REQUEST_METHOD'] === 'POST'):
             $this->callController($routeName, $controllerName);
         endif;
     }
@@ -34,11 +34,10 @@ class Router
     {
         if ($this->found)
             return;
-        if ($_SERVER['REQUEST_METHOD'] == 'DELETE'):
+        if ($_SERVER['REQUEST_METHOD'] === 'DELETE'):
             $this->callController($routeName, $controllerName);
         endif;
     }
-
    
     public function callController($routeName, $controllerName)
     {
@@ -54,6 +53,13 @@ class Router
             // call controller
             $arr = explode('@', $controllerName);
             call_user_func($arr, $controllerName);
+        }
+       
+    }
+
+    public function redirectTo404(){
+        if (!$this->found) {
+            echo "<h1> 404 URL Not Found</h1>";
         }
     }
 }

@@ -12,6 +12,7 @@ try{
     $router->post('/', 'ProductController@create');
     $router->get('/addProduct', 'ProductController@show');
     $router->get('/reset', 'ProductController@reset');
+    $router->redirectTo404();
 }
 catch (\Exception $e){
     die ('Message: ' .$e->getMessage());
