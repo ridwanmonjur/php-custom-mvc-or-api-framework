@@ -14,11 +14,8 @@ class Orm
     // must be static or multiple pdo classes.
     static protected $db;
     static protected $table;
-
-    static protected $model;
     static protected $class;
 
-    //Calling Database file each time when Product model is called 
     public static function init()
     {
         $host = $_ENV['HOST'];
@@ -29,14 +26,13 @@ class Orm
         try {
             $options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION];
             self::$db = new PDO($dsn, $user, $password, $options);
-        } catch (PDOException $e) {
-            die($e->getMessage());
+        } catch (PDOException $error) {
+            die($error->getMessage());
         }
     }
 
     public function __construct(string $table, string $class = "")
     {
-        // $this->init();
         self::$table = $table;
         $ucClass = ucfirst($class);
         self::$class = ucfirst($class);
@@ -55,9 +51,8 @@ class Orm
         try {
             $query = self::$db->query($sql)->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, self::$class);
             return $query;
-        } catch (PDOException $e) {
-            $error = $e->getMessage();
-            return $error;
+        }catch (PDOException $error) {
+            die($error->getMessage());
         }
     }
 
@@ -68,9 +63,8 @@ class Orm
         try {
             $query = self::$db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
             return $query;
-        } catch (PDOException $e) {
-            $error = $e->getMessage();
-            return $error;
+        }catch (PDOException $error) {
+            die($error->getMessage());
         }
     }
 
@@ -83,28 +77,29 @@ class Orm
             $query = self::$db->prepare("INSERT INTO $table ($keys) VALUES ($values)");
             $query->execute($data);
             $query = $query->fetchColumn();
-            // echo json_encode(compact('query'));
             return $query;
 
-        } catch (PDOException $e) {
-            $error = $e->getMessage();
-            return $error;
-
+        } catch (PDOException $error) {
+            die($error->getMessage());
         }
     }
 
-    public static function destroy(string $id)
+    public static function destroy(array $ids)
     {
         $table = self::$table;
 
         try {
-            $sql = "DELETE FROM $table WHERE sku= :id";
-            $stmt = self::$db->prepare($sql);
-            $stmt->bindParam(':id', $id);
-            $stmt->execute();
-        } catch (PDOException $e) {
-            $error = $e->getMessage();
-            return $error;
+            self::$db->beginTransaction();
+            foreach ($ids as $id) {
+                $sql = "DELETE FROM $table WHERE sku= :id";
+                $stmt = self::$db->prepare($sql);
+                $stmt->bindParam(':id', $id);
+                $stmt->execute();
+            }
+            self::$db->commit();
+        } catch (PDOException $error) {
+            self::$db->rollback();
+            die($error->getMessage());
         }
     }
 
@@ -115,9 +110,8 @@ class Orm
         try {
             $sql = "DELETE FROM $table";
             self::$db->exec($sql);
-        } catch (PDOException $e) {
-            $error = $e->getMessage();
-            return $error;
+        } catch (PDOException $error) {
+            die($error->getMessage());
         }
     }
 
