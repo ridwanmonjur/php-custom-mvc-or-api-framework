@@ -20,19 +20,27 @@ abstract class Product extends Model
         parent::__construct($this->tableName, $this->type);
     }
 
-     abstract public function setAttributeFromChild($attributeLst);
+    static public function setValues(
+    )
+    {
+        self::$table = "product";
+        self::$class = "book";
+    }
+
+    abstract public function setAttributeFromChild($attributeLst);
 
     public function validate(
         string $name,
         float $price,
         string $sku,
         string $attributeLst
-    ) {
-       $this->name = $name;
-       $this->price = $price;
-       $this->sku = $sku;
-       $this->attribute = $this->setAttributeFromChild($attributeLst);
-	}
+    )
+    {
+        $this->name = $name;
+        $this->price = $price;
+        $this->sku = $sku;
+        $this->attribute = $this->setAttributeFromChild($attributeLst);
+    }
 
     public function setName($name)
     {

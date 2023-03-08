@@ -9,8 +9,7 @@ class ProductController extends Controller
     static public function index()
     {
         // need to initialize because cannot dependency injection.
-        $book = new Book();
-        $data = Book::find();
+        $data = Product::find();
         (new self)->view("demo.php", $data);
         echo 'This is the new index route';
     }
@@ -30,9 +29,8 @@ class ProductController extends Controller
     static public function destroy()
     {
         parse_str(file_get_contents('php://input'),  $delete);
-        $book = new Book();
         var_dump($delete);
-        Book::destroy($delete["sku"]);
+        Product::destroy($delete["sku"]);
         (new self)->view("demo.php");
     }
     static public function massDestroy()
