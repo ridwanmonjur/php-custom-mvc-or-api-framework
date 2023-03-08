@@ -62,4 +62,24 @@ abstract class Product extends Model
         $this->name = $name;
     }
 
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    public function getSku()
+    {
+        return $this->sku;
+    }
+
+    public function getAttribute()
+    {
+        return $this->attribute;
+    }
+
 }

@@ -27,6 +27,10 @@ if (!function_exists('compareTwoUrls')):
         // parse routes
         $routeParsed = parse_url($route);
         $routeTemplateParsed = parse_url($routeTemplate);
+        print_apple($routeParsed);
+        print_apple($routeTemplateParsed);
+        print_apple($route);
+        print_apple($routeTemplate);
         // extract route paths
         $routeUrlPathLists = array_key_exists("path", $routeParsed) ? explode("/", $routeParsed["path"]) : [];
         $routeTemplatePathLists = array_key_exists("path", $routeTemplateParsed) ? explode("/", $routeTemplateParsed["path"]) : [];

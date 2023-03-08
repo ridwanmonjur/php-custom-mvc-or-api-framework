@@ -9,7 +9,7 @@ $router = new Router();
 
 try{
     $router->get('/', 'ProductController@index');
-    $router->get('/addProduct', 'ProductController@create');
+    $router->get('/addProduct', 'ProductController@show');
     $router->post('/', 'ProductController@create');
     $router->delete('/', 'ProductController@destroy');
     $router->delete('/mass', 'ProductController@massDestroy');

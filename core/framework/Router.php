@@ -9,6 +9,7 @@ class Router
     public function __construct()
     {
         $this->found = false;
+        var_dump($_SERVER['REQUEST_METHOD']);
     }
 
     public function get($routeName, $controllerName)
@@ -50,6 +51,7 @@ class Router
 
         $request = $_SERVER['REQUEST_URI'];
         // remove xamp file name
+        var_dump($request);
         $request = str_replace('/scandiweb-test', '', $request);       
         $comparison = compareTwoUrls($request, $routeName);
         $matches = $comparison["matches"];
