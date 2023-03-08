@@ -5,19 +5,17 @@ require_once realpath(".") . '/app/models/' . 'Product.php';
 
 class Disc extends Product
 {
-    private string $type = "disc";
+    private string $type;
+    private int $disc;
 
     public function __construct(
-        string $name,
-        float $price,
-        string $sku,
-        private int $disc
     )
     {
-        parent::__construct($name, $price, $sku, $this->getAttribute(), $this->type);
+        $this->type = "disc";
+        parent::__construct($this->type);
     }
 
-    public function getAttribute()
+    public function setAttributeFromChild($attributeLst)
     {
         return "{$this->disc} MB";
     }

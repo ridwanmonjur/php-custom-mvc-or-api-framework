@@ -1,29 +1,42 @@
 <?php
 
 use Core\Controller;
-use Core\Model;
-require_once  realpath(".") . '/app/models/' . 'Book.php';
 
+require_once realpath(".") . '/app/models/' . 'Book.php';
 
 class ProductController extends Controller
 {
-    static public function index(){
-        $data =  Book::findAssoc();
+    static public function index()
+    {
+        // need to initialize because cannot dependency injection.
+        $book = new Book();
+        $data = Book::find();
         (new self)->view("demo.php", $data);
-        echo 'This is the new index route'; 
+        echo 'This is the new index route';
     }
-    static public function create(){
-       
-        $arr = ["sku" => "BOOK0008", "name" => "Harry Potter and the Cursed Child 2", "price" => 500, "type" => "book", "attribute"=> "20 KG"];
-        Book::create($arr);
+    static public function create()
+    {
+        $model = (new self)->model($_POST['switcher']);
+        $arr = [
+            "sku" => $_POST["sku"],
+            "name" => $_POST["name"],
+            "price" => $_POST["price"],
+            "type" => $_POST["switcher"],
+            "attribute" => $_POST["attribute"]
+        ];
+        $model->create($arr);
         (new self)->view("demo.php");
-
-
-        echo 'This is the new create route'; 
     }
-    static public function destroy(){
+    static public function destroy()
+    {
+        parse_str(file_get_contents('php://input'),  $delete);
+        $book = new Book();
+        var_dump($delete);
+        Book::destroy($delete["sku"]);
         (new self)->view("demo.php");
-        echo 'This is the new delete route'; 
     }
-    
+    static public function massDestroy()
+    {
+        (new self)->view("demo.php");
+    }
 }

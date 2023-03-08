@@ -18,7 +18,6 @@ class Orm
     static protected $model;
     static protected $class;
 
-
     //Calling Database file each time when Product model is called 
     public static function init()
     {
@@ -39,16 +38,16 @@ class Orm
     {
         // $this->init();
         self::$table = $table;
-        self::$class = $class;
+        $ucClass = ucfirst($class);
+        self::$class = ucfirst($class);
         if (!empty($class)):
-            require_once(realpath(".") . "/app/models/$class.php");
-            var_dump(self::$class);
+            require_once(realpath(".") . "/app/models/$ucClass.php");
         endif;
     }
 
     public function __destruct()
     {
-        $this->db = null;
+        self::$db = null;
     }
     public static function find()
     {
@@ -79,13 +78,12 @@ class Orm
     {
         $keys = implode(', ', array_keys($data));
         $values = ':' . implode(', :', array_keys($data));
-        var_dump($keys, $values);
         $table = self::$table;
         try {
             $query = self::$db->prepare("INSERT INTO $table ($keys) VALUES ($values)");
             $query->execute($data);
             $query = $query->fetchColumn();
-            echo json_encode(compact('query'));
+            // echo json_encode(compact('query'));
             return $query;
 
         } catch (PDOException $e) {
@@ -102,28 +100,34 @@ class Orm
         try {
             $sql = "DELETE FROM $table WHERE sku= :id";
             $stmt = self::$db->prepare($sql);
-            $stmt->bind(':id', $id);
-            $stmt->exec();
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
         } catch (PDOException $e) {
             $error = $e->getMessage();
-            return $error;        }
+            return $error;
+        }
     }
 
-    public static function destroyMany(array $ids)
+    public static function destroyMany()
     {
         $table = self::$table;
 
         try {
-            self::$db->beginTransaction();
-            foreach ($ids as $id) {
-                $sql = "DELETE FROM $table WHERE sku= :id";
-                $stmt = self::$db->prepare($sql);
-                // $stmt->bind(':id', $id);
-                // $stmt->exec();
-            }
-            self::$db->commit();
+            $sql = "DELETE FROM $table";
+            self::$db->exec($sql);
         } catch (PDOException $e) {
-            self::$db->rollback();
+            $error = $e->getMessage();
+            return $error;
+        }
+    }
+
+    public static function exec($sql)
+    {
+        try {
+            return self::$db->exec($sql);
+        } catch (PDOException $e) {
+            $error = $e->getMessage();
+            return $error;
         }
     }
 

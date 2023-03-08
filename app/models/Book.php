@@ -1,25 +1,22 @@
 <?php
 
-require_once  realpath(".") . '/app/models/' . 'Product.php';
-
+require_once realpath(".") . '/app/models/' . 'Product.php';
 
 class Book extends Product
 {
-    private string $type="book";
+    private string $type;
+    private string $weight;
 
     public function __construct(
-        string $name,
-        float $price,
-        string $sku,
-        private string $weight
-    ) {      
-        parent::__construct($name, $price, $sku, $this->getAttribute(), $this->type);
-    }
-
-    public function getAttribute()
+    )
     {
-        $this->weight = "{$this->weight} KG";
+        $this->type = "book";
+        parent::__construct($this->type);
     }
 
-   
+    public function setAttributeFromChild($attributeLst)
+    {
+        return "{$this->weight} KG";
+    }
+
 }

@@ -17,7 +17,7 @@ Book::create(
 
 );
 
-print_apple ( $model->findAssoc() );
+print_apple ( Book::findAssoc() );
 
 $productController = new Controller();
 $demo = ['hello', 'world'];

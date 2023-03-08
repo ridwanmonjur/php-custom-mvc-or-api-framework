@@ -8,10 +8,11 @@ class Controller
     {
         require("app/views/$view");
     }
-    public function model($model)
+    public function model($view, ...$modelArgs)
     {
-        require("app/models/$model.php");
-        return new $model;
+        $ucView = ucfirst($view);
+        require_once("app/models/$ucView.php");
+        return new $ucView(...$modelArgs);
     }
     static public function index(){
         (new self)->view("demo.php");

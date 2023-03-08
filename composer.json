@@ -1,8 +1,7 @@
 {
     "autoload": {
         "psr-4": {
-             "Core\\": "core/framework",
-             "App\\": "app/"
+             "Core\\": "core/framework"
 
         },
         "files": [ "core/utility/getPattern.php", "core/utility/print_apple.php" ]
