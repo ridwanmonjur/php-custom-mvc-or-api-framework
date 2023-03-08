@@ -20,7 +20,7 @@ abstract class Product extends Model
         parent::__construct($this->tableName, $this->type);
     }
 
-    static public function setValues(
+    static public function setOrmTableValues(
     )
     {
         self::$table = "product";

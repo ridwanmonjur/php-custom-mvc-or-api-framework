@@ -1,7 +1,6 @@
 <?php
 
 require_once 'development.php';
-require_once realpath(".") . '/vendor/autoload.php';
 require_once  realpath(".") . '/app/models/' . 'Product.php';
 require_once  realpath(".") . '/app/models/' . 'Book.php';
 

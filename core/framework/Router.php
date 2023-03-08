@@ -9,7 +9,6 @@ class Router
     public function __construct()
     {
         $this->found = false;
-        var_dump($_SERVER['REQUEST_METHOD']);
     }
 
     public function get($routeName, $controllerName)
@@ -24,7 +23,6 @@ class Router
 
     public function post($routeName, $controllerName)
     {
-        // check1: has route matched already?
         if ($this->found)
             return;
         if ($_SERVER['REQUEST_METHOD'] == 'POST'):
@@ -34,7 +32,6 @@ class Router
 
     public function delete($routeName, $controllerName)
     {
-        // check1: has route matched already?
         if ($this->found)
             return;
         if ($_SERVER['REQUEST_METHOD'] == 'DELETE'):
@@ -42,16 +39,12 @@ class Router
         endif;
     }
 
-    function router($routes)
-    {
-
-    }
+   
     public function callController($routeName, $controllerName)
     {
 
         $request = $_SERVER['REQUEST_URI'];
         // remove xamp file name
-        var_dump($request);
         $request = str_replace('/scandiweb-test', '', $request);       
         $comparison = compareTwoUrls($request, $routeName);
         $matches = $comparison["matches"];

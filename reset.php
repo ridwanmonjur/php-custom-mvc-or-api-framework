@@ -1,7 +1,6 @@
 <?php
 
 require_once 'development.php';
-require_once realpath(".") . '/vendor/autoload.php';
 
 use Core\Orm;
 

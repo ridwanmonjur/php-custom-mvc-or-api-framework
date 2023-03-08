@@ -8,15 +8,12 @@ class ProductController extends Controller
 {
     static public function index()
     {
-        echo 'index';
         // need to initialize because cannot dependency injection.
         $data = Product::find();
-        var_dump($data);
         (new self)->view("home/index.php", $data);
     }
     static public function show()
     {
-        echo 'show';
         $data = Product::find();
         (new self)->view("product/addProduct.php", $data);
     }
@@ -34,23 +31,25 @@ class ProductController extends Controller
             $model->create($arr);
             (new self)->view("demo.php");
         elseif ($_POST['sku'] ?? false):
-        
+            $sku = $_POST['sku'];
+            Product::destroy($sku);
+            header("Location: " . $_SERVER['REQUEST_URI']);
         else:
-        
+            echo "stupid url";
         endif;
     }
-    static public function destroy()
+    static public function reset()
     {
-        echo 'destroy';
-        parse_str(file_get_contents('php://input'), $delete);
-        var_dump($delete);
-        var_dump($_SERVER['QUERY_STRING']);
-        Product::destroy($delete["sku"]);
-        (new self)->view("demo.php");
-    }
-    static public function massDestroy()
-    {
-        echo 'massDestroy';
-        (new self)->view("demo.php");
+        $sql = "INSERT INTO `product` (`sku`, `name`, `price`, `type`, `attribute`) VALUES
+        ('BOOK000', 'Harry Potter and the Cursed Child', 50, 'book', '2 KG'),
+        ('DISC000', 'Movie: Titanic', 10, 'disc', '120 MB'),
+        ('DISC001', 'Movie: The Gladiator', 10, 'disc', '120 MB'),
+        ('DISC002', 'Movie: The Dark Knight', 10, 'disc', '120 MB'),
+        ('FURNITURE000', 'Blue chair', 20, 'furniture', '30x10x10'),
+        ('FURNITURE001', 'Read Chair chair', 20, 'furniture', '30x10x10');";
+        Product::destroyMany();
+        Product::exec($sql);
+        var_dump(getBaseUrl());
+        // header("Location: " . geturl());
     }
 }

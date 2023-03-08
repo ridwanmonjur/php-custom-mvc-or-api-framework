@@ -9,11 +9,10 @@ $router = new Router();
 
 try{
     $router->get('/', 'ProductController@index');
-    $router->get('/addProduct', 'ProductController@show');
     $router->post('/', 'ProductController@create');
-    $router->delete('/', 'ProductController@destroy');
-    $router->delete('/mass', 'ProductController@massDestroy');
+    $router->get('/addProduct', 'ProductController@show');
+    $router->get('/reset', 'ProductController@reset');
 }
 catch (\Exception $e){
-    echo 'Message: ' .$e->getMessage();
+    die ('Message: ' .$e->getMessage());
 }
