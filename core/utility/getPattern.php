@@ -32,12 +32,19 @@ if (!function_exists('compareTwoUrls')):
         $_SAMPLE_ROUTE = "http://google.org";
         $route = $_SAMPLE_ROUTE . $route;
         $routeTemplate = $_SAMPLE_ROUTE . $routeTemplate;
+        // remove the asterisk
+        $posAsterisk = strpos($routeTemplate, '*');
+        if ($posAsterisk  != false){
+            $route = substr($route, 0, $posAsterisk-1);
+            $routeTemplate = substr($routeTemplate, 0, $posAsterisk-1);
+        }
         // parse routes
         $routeParsed = parse_url($route);
         $routeTemplateParsed = parse_url($routeTemplate);
         // extract route paths
         $routeUrlPathLists = array_key_exists("path", $routeParsed) ? explode("/", $routeParsed["path"]) : [];
         $routeTemplatePathLists = array_key_exists("path", $routeTemplateParsed) ? explode("/", $routeTemplateParsed["path"]) : [];
+        print_apple($routeUrlPathLists, $routeTemplatePathLists);
         // compare path lists
         $isSameNumberOfPathLists = sizeof($routeUrlPathLists) === sizeof($routeTemplatePathLists);
         // 1. extract urlParams

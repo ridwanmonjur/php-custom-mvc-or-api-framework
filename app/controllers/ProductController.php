@@ -34,8 +34,6 @@ class ProductController extends Controller
             $sku = $_POST['sku'];
             Product::destroy($sku);
             header("Location: " . $_SERVER['REQUEST_URI']);
-        else:
-            echo "stupid url";
         endif;
     }
     static public function reset()
@@ -50,5 +48,19 @@ class ProductController extends Controller
         Product::destroyMany();
         Product::exec($sql);
         echo "Reset the data";
+    }
+    static public function serve()
+    {
+        try {
+            if(file_exists($_SERVER['REQUEST_URI'])){
+                require($_SERVER['REQUEST_URI']) ;
+            }
+            else throw new Exception('File doesn\'t exist'); 
+        }
+        catch(\Exception $error){
+            die($error);
+        }
+        // $_SERVER['REQUEST_URI'];
+        // require();
     }
 }

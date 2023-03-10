@@ -19,8 +19,6 @@
         </div>
     </nav>
     <main id="body">
-
-
         <div class="container">
             <form id="delete_form" action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="POST"
                 onsubmit="deleteForm(event);">
