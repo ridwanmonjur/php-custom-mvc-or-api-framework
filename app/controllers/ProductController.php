@@ -29,7 +29,7 @@ class ProductController extends Controller
                 "attribute" => $_POST["attribute"]
             ];
             $model->create($arr);
-            (new self)->view("demo.php");
+            header("Location: " . $_SERVER['REQUEST_URI']);
         elseif ($_POST['sku'] ?? false):
             $sku = $_POST['sku'];
             Product::destroy($sku);

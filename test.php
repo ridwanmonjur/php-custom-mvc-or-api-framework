@@ -16,7 +16,7 @@ Book::create(
 
 );
 
-print_apple ( Book::findAssoc() );
+print_pre_formatted ( Book::findAssoc() );
 
 $productController = new Controller();
 $demo = ['hello', 'world'];
@@ -47,7 +47,7 @@ $routeTemplateList = [
 
 foreach ($routeList as $index => $route) {
     $compare = compareTwoUrls($route, $routeTemplateList[$index]);
-    print_apple($compare);
+    print_pre_formatted($compare);
 }
 
 ?>

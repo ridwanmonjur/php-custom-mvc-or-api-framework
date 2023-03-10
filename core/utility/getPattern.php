@@ -44,7 +44,7 @@ if (!function_exists('compareTwoUrls')):
         // extract route paths
         $routeUrlPathLists = array_key_exists("path", $routeParsed) ? explode("/", $routeParsed["path"]) : [];
         $routeTemplatePathLists = array_key_exists("path", $routeTemplateParsed) ? explode("/", $routeTemplateParsed["path"]) : [];
-        print_apple($routeUrlPathLists, $routeTemplatePathLists);
+        print_pre_formatted($routeUrlPathLists, $routeTemplatePathLists);
         // compare path lists
         $isSameNumberOfPathLists = sizeof($routeUrlPathLists) === sizeof($routeTemplatePathLists);
         // 1. extract urlParams

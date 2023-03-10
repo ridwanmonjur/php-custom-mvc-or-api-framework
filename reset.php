@@ -16,5 +16,5 @@ Orm::init();
 $model = new Orm("product");
 $model::destroyMany();
 $model::exec($sql);
-print_apple($model::findAssoc());
+print_pre_formatted($model::findAssoc());
 ?>

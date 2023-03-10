@@ -1,7 +1,7 @@
 <?php
 
-if (!function_exists('print_apple')):
-    function print_apple(...$args)
+if (!function_exists('print_pre_formatted')):
+    function print_pre_formatted(...$args)
     {
         echo "<pre>";
         echo var_dump($args);
