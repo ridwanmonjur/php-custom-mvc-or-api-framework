@@ -23,7 +23,6 @@ class ProductController extends Controller
         // http://localhost/scandiweb-test/
         if (isset($_POST['switcher'])):
             $model = (new self)->model($_POST['switcher']);
-            var_dump($_POST["attribute"]);
             $model->setAttributeFromChild($_POST["attribute"]);
             $arr = [
                 "sku" => $_POST["sku"],
@@ -33,10 +32,8 @@ class ProductController extends Controller
                 "attribute" => $model->getAttribute()
             ];
             $model->create($arr);
-            
             header("Location: " . getBaseUrl());
         elseif (isset($_POST['sku'])):
-            var_dump($_POST);
             $sku = $_POST['sku'];
             Product::destroy($sku);
             header("Location: " . getBaseUrl());

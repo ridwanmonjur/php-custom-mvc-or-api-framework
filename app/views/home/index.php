@@ -8,13 +8,18 @@
             <a href="#!" class="brand-logo">
                 Product List
             </a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <ul class="right hide-on-med-and-down">
                 <li><button onclick="window.location.href='<?php echo $_SERVER['REQUEST_URI']; ?>addProduct'"
                         type="button" class="red lighten-1 waves-effect waves-light btn-large">ADD</button></li>
                 <li>
                     <button type="submit" id="delete-product-btn" type="submit" form="delete_form"
                         class=" red lighten-1 waves-effect waves-light btn-large">MASS DELETE</button>
                 </li>
+            </ul>
+            <ul class="sidenav" id="mobile-demo">
+                <li><a onclick="window.location.href='<?php echo $_SERVER['REQUEST_URI']; ?>addProduct'"
+                        class="red lighten-1 waves-effect waves-light btn-large" type="button">ADD</a></li>
             </ul>
         </div>
     </nav>
@@ -48,6 +53,8 @@
                         </div>
                     <?php endforeach; ?>
                 </div>
+                <button type="submit" id="delete-product-btn" type="submit" form="delete_form"
+                    class="hide-on-large-only red lighten-1 waves-effect waves-light btn-large">MASS DELETE</button>
             </form>
         </div>
     </main>
