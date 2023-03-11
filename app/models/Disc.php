@@ -5,8 +5,8 @@ require_once realpath(".") . '/app/models/' . 'Product.php';
 
 class Disc extends Product
 {
-    private string $type;
-    private float $size;
+    protected $type;
+    private $size;
 
     public function __construct(
     )

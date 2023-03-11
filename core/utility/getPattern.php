@@ -1,23 +1,15 @@
 <?php
 
+use Dotenv\Dotenv;
+
+$dotenv = Dotenv::createImmutable(realpath("."));
+$dotenv->load();
+
 if (!function_exists('getUrl')):
     function getUrl()
     {
         $CurPageURL = getProtocol() . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
         return $CurPageURL;
-    }
-endif;
-
-
-if (!function_exists('getRootFolderName')):
-    function getRootFolderName()
-    {
-        $cwd = getcwd();
-        $strPos = strrpos($cwd, "/htdocs/");
-        $length = 8;
-        $xamppDirName = substr($cwd, $strPos + $length);
-        $rootFolderName = "/"  .$xamppDirName;
-        return $rootFolderName;
     }
 endif;
 
@@ -28,7 +20,8 @@ if (!function_exists('getBaseUrl')):
         $strPos = strrpos($cwd, "/htdocs/");
         $length = 8;
         $xamppDirName = substr($cwd, $strPos + $length);
-        $CurPageURL = getProtocol() . $_SERVER['HTTP_HOST'] . "/"  .$xamppDirName;
+        $isLocalHost = $_ENV["localhostXampp"] == "true";
+        $CurPageURL =  ($isLocalHost) ? getProtocol() . $_SERVER['HTTP_HOST'] . "/"  .$xamppDirName : getProtocol() . $_SERVER['HTTP_HOST'] ;
         return $CurPageURL;
     }
 endif;

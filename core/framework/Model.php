@@ -7,8 +7,8 @@ use Core\Orm;
 class Model extends Orm
 {
    
-    private string $tableName;
-    private string $className;
+    private $tableName;
+    private $className;
 
     public function __construct($table, $class)
     {

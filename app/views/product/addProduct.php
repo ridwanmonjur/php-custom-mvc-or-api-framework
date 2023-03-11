@@ -2,11 +2,6 @@
 <?php require_once(dirname(__FILE__) . "/../layouts/header.php"); ?>
 
 <body>
-    <?php echo getRootFolderName(); ?>
-    <?php echo getBaseUrl(); ?>
-    <?php echo $_SERVER["REQUEST_URI"]; ?>
-
-
     <nav>
         <div class="nav-wrapper mx-5">
             <a href="#!" class="brand-logo">
@@ -38,7 +33,7 @@
     </nav>
     <main id="body">
         <div class="container my-5 py-5">
-            <form id="product_form" action="<?php echo getRootFolderName() . "/"; ?>" method="POST">
+            <form id="product_form" action="<?php echo getBaseUrl() . "/"; ?>" method="POST">
                 <div class="row">
                     <label class="col s10 l2 label-fix" for="sku">SKU</label>
                     <div class="col s10 l6">

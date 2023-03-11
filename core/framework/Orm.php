@@ -31,7 +31,7 @@ class Orm
         }
     }
 
-    public function __construct(string $table, string $class = "")
+    public function __construct($table, $class = "")
     {
         self::$table = $table;
         $ucClass = ucfirst($class);
@@ -68,7 +68,7 @@ class Orm
         }
     }
 
-    public static function create(array $data)
+    public static function create($data)
     {
         $keys = implode(', ', array_keys($data));
         $values = ':' . implode(', :', array_keys($data));
@@ -76,7 +76,6 @@ class Orm
         try {
             $query = self::$db->prepare("INSERT INTO $table ($keys) VALUES ($values)");
             $query->execute($data);
-            $query = $query->fetchColumn();
             return $query;
 
         } catch (PDOException $error) {
@@ -84,7 +83,7 @@ class Orm
         }
     }
 
-    public static function destroy(array $ids)
+    public static function destroy($ids)
     {
         $table = self::$table;
 

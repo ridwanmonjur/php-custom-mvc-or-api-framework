@@ -4,15 +4,16 @@ use Core\Model;
 
 abstract class Product extends Model
 {
-    protected string $name;
-    protected float $price;
-    protected string $sku;
-    protected string $attribute;
-    protected string $tableName;
-    protected string $className;
+    protected $name;
+    protected $price;
+    protected $sku;
+    protected $attribute;
+    protected $tableName;
+    protected $className;
+    protected $type;
 
     public function __construct(
-        private string $type
+        $type
     )
     {
         $this->tableName = "product";

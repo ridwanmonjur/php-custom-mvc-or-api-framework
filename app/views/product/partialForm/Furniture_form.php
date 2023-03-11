@@ -1,5 +1,5 @@
 <div class="row">
-    <label class="col s10 l2 label-fix" for="height">height (CM)</label>
+    <label class="col s10 l2 label-fix" for="height">Height (CM)</label>
     <div class="col s10 l6">
         <input type="number" id="height" name="attribute[height]" required>
     </div>

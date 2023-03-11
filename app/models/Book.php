@@ -4,8 +4,8 @@ require_once realpath(".") . '/app/models/' . 'Product.php';
 
 class Book extends Product
 {
-    private string $type;
-    private float $weight;
+    protected $type;
+    private $weight;
 
     public function __construct(
     )

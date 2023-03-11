@@ -5,10 +5,10 @@ require_once realpath(".") . '/app/models/' . 'Product.php';
 
 class Furniture extends Product
 {
-    public string $type;
-    private float $height;
-    private float $width;
-    private float $length;
+    protected $type;
+    private $height;
+    private $width;
+    private $length;
 
 
     public function __construct(
