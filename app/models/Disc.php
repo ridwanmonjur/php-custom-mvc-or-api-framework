@@ -6,7 +6,7 @@ require_once realpath(".") . '/app/models/' . 'Product.php';
 class Disc extends Product
 {
     private string $type;
-    private int $disc;
+    private float $size;
 
     public function __construct(
     )
@@ -17,7 +17,8 @@ class Disc extends Product
 
     public function setAttributeFromChild($attributeLst)
     {
-        return "{$this->disc} MB";
+        $this->size = $attributeLst["size"];
+        $this->setAttribute("{$this->size} MB");
     }
 
 }

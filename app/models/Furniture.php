@@ -6,6 +6,10 @@ require_once realpath(".") . '/app/models/' . 'Product.php';
 class Furniture extends Product
 {
     public string $type;
+    private float $height;
+    private float $width;
+    private float $length;
+
 
     public function __construct(
     )
@@ -16,7 +20,9 @@ class Furniture extends Product
 
     public function setAttributeFromChild($attributeLst)
     {
-        return "{$attributeLst['height']}x{$attributeLst['width']}x{$attributeLst['length']}";
-
+        $this->height= $attributeLst['height'];
+        $this->width= $attributeLst['width'];
+        $this->length= $attributeLst['length'];
+        $this->setAttribute("{$this->height}x{$this->width}x{$this->length}");
     }
 }

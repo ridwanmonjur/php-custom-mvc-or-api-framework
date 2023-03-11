@@ -19,21 +19,27 @@ class ProductController extends Controller
     }
     static public function create()
     {
-        if ($_POST['switcher'] ?? false):
+  
+        // http://localhost/scandiweb-test/
+        if (isset($_POST['switcher'])):
             $model = (new self)->model($_POST['switcher']);
+            var_dump($_POST["attribute"]);
+            $model->setAttributeFromChild($_POST["attribute"]);
             $arr = [
                 "sku" => $_POST["sku"],
                 "name" => $_POST["name"],
                 "price" => $_POST["price"],
                 "type" => $_POST["switcher"],
-                "attribute" => $_POST["attribute"]
+                "attribute" => $model->getAttribute()
             ];
             $model->create($arr);
-            header("Location: " . $_SERVER['REQUEST_URI']);
-        elseif ($_POST['sku'] ?? false):
+            
+            header("Location: " . getBaseUrl());
+        elseif (isset($_POST['sku'])):
+            var_dump($_POST);
             $sku = $_POST['sku'];
             Product::destroy($sku);
-            header("Location: " . $_SERVER['REQUEST_URI']);
+            header("Location: " . getBaseUrl());
         endif;
     }
     static public function reset()
@@ -47,17 +53,16 @@ class ProductController extends Controller
         ('FURNITURE001', 'Read Chair chair', 20, 'furniture', '30x10x10');";
         Product::destroyMany();
         Product::exec($sql);
-        echo "Reset the data";
+        header("Location: " . getBaseUrl());
     }
     static public function serve()
     {
         try {
-            if(file_exists($_SERVER['REQUEST_URI'])){
-                require($_SERVER['REQUEST_URI']) ;
-            }
-            else throw new Exception('File doesn\'t exist'); 
-        }
-        catch(\Exception $error){
+            if (file_exists($_SERVER['REQUEST_URI'])) {
+                require($_SERVER['REQUEST_URI']);
+            } else
+                throw new Exception('File doesn\'t exist');
+        } catch (\Exception $error) {
             die($error);
         }
         // $_SERVER['REQUEST_URI'];

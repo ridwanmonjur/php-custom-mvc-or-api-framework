@@ -8,10 +8,27 @@ if (!function_exists('getUrl')):
     }
 endif;
 
+
+if (!function_exists('getRootFolderName')):
+    function getRootFolderName()
+    {
+        $cwd = getcwd();
+        $strPos = strrpos($cwd, "/htdocs/");
+        $length = 8;
+        $xamppDirName = substr($cwd, $strPos + $length);
+        $rootFolderName = "/"  .$xamppDirName;
+        return $rootFolderName;
+    }
+endif;
+
 if (!function_exists('getBaseUrl')):
     function getBaseUrl()
     {
-        $CurPageURL = getProtocol() . $_SERVER['HTTP_HOST'];
+        $cwd = getcwd();
+        $strPos = strrpos($cwd, "/htdocs/");
+        $length = 8;
+        $xamppDirName = substr($cwd, $strPos + $length);
+        $CurPageURL = getProtocol() . $_SERVER['HTTP_HOST'] . "/"  .$xamppDirName;
         return $CurPageURL;
     }
 endif;
@@ -44,7 +61,6 @@ if (!function_exists('compareTwoUrls')):
         // extract route paths
         $routeUrlPathLists = array_key_exists("path", $routeParsed) ? explode("/", $routeParsed["path"]) : [];
         $routeTemplatePathLists = array_key_exists("path", $routeTemplateParsed) ? explode("/", $routeTemplateParsed["path"]) : [];
-        print_pre_formatted($routeUrlPathLists, $routeTemplatePathLists);
         // compare path lists
         $isSameNumberOfPathLists = sizeof($routeUrlPathLists) === sizeof($routeTemplatePathLists);
         // 1. extract urlParams

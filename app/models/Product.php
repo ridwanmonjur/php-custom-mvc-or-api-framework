@@ -57,9 +57,9 @@ abstract class Product extends Model
         $this->sku = $sku;
     }
 
-    public function setAttribute($name)
+    public function setAttribute($attribute)
     {
-        $this->name = $name;
+        $this->attribute = $attribute;
     }
 
     public function getName()

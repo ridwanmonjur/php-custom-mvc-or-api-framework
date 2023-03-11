@@ -1,6 +1,12 @@
 <?php $title = "Add Product" ?>
 <?php require_once(dirname(__FILE__) . "/../layouts/header.php"); ?>
+
 <body>
+<?php echo getRootFolderName(); ?> 
+<?php echo getBaseUrl(); ?> 
+<?php echo $_SERVER["REQUEST_URI"]; ?> 
+
+
     <nav>
         <div class="nav-wrapper mx-5">
             <a href="#!" class="brand-logo">
@@ -10,7 +16,7 @@
                 <li><button type="submit" form="product_form" name="submit"
                         class="red lighten-1 waves-effect waves-light btn-large">Save</button></li>
                 <li>
-                    <button onclick="window.location.href='<?php echo $_SERVER['REQUEST_URI']; ?>addProduct'"
+                    <button onclick="window.location.href='<?php echo getBaseUrl(); ?>'"
                         id="delete-product-btn" class=" red lighten-1 waves-effect waves-light btn-large">
                         Cancel
                     </button>
@@ -20,8 +26,7 @@
     </nav>
     <main id="body">
         <div class="container my-5 py-5">
-            <form id="product_form" action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="POST"
-                onsubmit="deleteForm(event);">
+            <form id="product_form" action="<?php echo getRootFolderName()."/"; ?>" method="POST">
                 <div class="row">
                     <label class="col s2 label-fix" for="sku">SKU</label>
                     <div class="col s4">
@@ -52,8 +57,8 @@
                     <label class="col s2 label-fix" for="switcher">Type Switcher</label>
                     <div class="col s4 input-field">
                         <select class="browser-default" name="switcher" id="productType" required>
-                            <option value="" id="none">Type Switcher</option>
-                            <option value="DVD" id="DVD_form">DVD</option>
+                            <option value="none" id="none">Type Switcher</option>
+                            <option value="Disc" id="Disc_form">DVD</option>
                             <option value="Furniture" id="Furniture_form">Furniture</option>
                             <option value="Book" id="Book_form">Book</option>
                         </select>
