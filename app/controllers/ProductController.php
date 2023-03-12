@@ -14,12 +14,10 @@ class ProductController extends Controller
     }
     static public function show()
     {
-        $data = Product::find();
-        (new self)->view("product/addProduct.php", $data);
+        (new self)->view("product/addProduct.php");
     }
-    static public function create()
+    static public function createOrDestroy()
     {
-  
         // http://localhost/scandiweb-test/
         if (isset($_POST['switcher'])):
             $model = (new self)->model($_POST['switcher']);
@@ -36,7 +34,14 @@ class ProductController extends Controller
         elseif (isset($_POST['sku'])):
             $sku = $_POST['sku'];
             Product::destroy($sku);
-            header("Location: " . getBaseUrl());
+            header("Refresh:0");
+        else: 
+            try {
+                throw new Exception('Post inputs incorrect ');
+            }
+            catch (\Exception $error) {
+                die($error);
+            }
         endif;
     }
     static public function reset()

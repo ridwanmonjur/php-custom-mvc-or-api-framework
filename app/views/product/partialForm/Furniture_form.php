@@ -1,26 +1,24 @@
 <div class="row">
-    <label class="col s10 l2 label-fix" for="height">Height (CM)</label>
-    <div class="col s10 l6">
-        <input type="number" id="height" name="attribute[height]" required>
+    <label class="col-12-sm col-3 label-fix" for="height">Height (CM)</label>
+    <div class="col-12-sm col-6">
+        <input type="number" class="input" id="height" name="attribute[height]" required>
     </div>
 </div>
 
 <div class="row">
-    <label class="col s10 l2 label-fix" for="width">Width (CM)</label>
-    <div class="col s10 l6">
-        <input type="number" id="width" name="attribute[width]" required>
+    <label class="col-12-sm col-3 label-fix" for="width">Width (CM)</label>
+    <div class="col-12-sm col-6">
+        <input type="number" class="input" id="width" name="attribute[width]" required>
     </div>
 </div>
 
 <div class="row">
-    <label class="col s10 l2 label-fix" for="length">Length (CM)</label>
-    <div class="col s10 l6">
-        <input type="number" id="length" name="attribute[length]" required>
+    <label class="col-12-sm col-3 label-fix" for="length">Length (CM)</label>
+    <div class="col-12-sm col-6">
+        <input type="number" class="input" id="length" name="attribute[length]" required>
     </div>
 </div>
 
-<div class="row">
-    <div class="col s10 l6">
-        <span>Please, provide dimensions in MB</span>
-    </div>
-</div>
+<h3 class="ml-5 is-size-5 mt-5 has-text-weight-semibold">
+    Please, provide dimensions in MB.
+</h3>

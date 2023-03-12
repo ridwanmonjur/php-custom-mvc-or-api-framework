@@ -1,14 +1,12 @@
 <div class="form-group row">
-    <label class="col s10 l2 label-fix" for="size">Size (MB)</label>
+    <label class="col-12-sm col-3 label-fix" for="size">Size (MB)</label>
 
-    <div class="col s10 l6 label-fix">
-        <input type="number" id="size" name="attribute[size]" required>
+    <div class="col-12-sm col-6 label-fix">
+        <input type="number" class="input" id="size" name="attribute[size]" required>
     </div>
 
 </div>
 
-<div class="form-group row">
-    <div class="col s10 l6">
-        <span>Please, provide size in MB</span>
-    </div>
-</div>
+<h3 class="ml-5 is-size-5 mt-5 has-text-weight-semibold">
+    Please, provide size in MB.
+</h3>
