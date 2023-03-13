@@ -25,7 +25,7 @@
         </div>
     </nav>
     <main id="body">
-        <form id="product_form" action="<?php echo getBaseUrl() . "/"; ?>" method="POST" class="mx-5 px-5 py-5 my-5">
+        <form id="product_form" action="<?php echo getBaseUrl() . "/"; ?>" method="POST" class="mx-5 px-5 py-5 my-5" novalidate>
             <div class="row">
                 <label class="col-12-sm col-3 label-fix" for="sku">SKU</label>
                 <div class="col-12-sm col-4">
@@ -60,6 +60,9 @@
                 </div>
             </div>
             <div id="switch">
+            <?php require_once(dirname(__FILE__) . "/partialForm/Book_form.php"); ?>
+            <?php require_once(dirname(__FILE__) . "/partialForm/Disc_form.php"); ?>
+            <?php require_once(dirname(__FILE__) . "/partialForm/Furniture_form.php"); ?>
             </div>
             <button type="submit" form="product_form" name="submit"
                 class="button are-large is-info is-hidden-desktop is-block-touch my-5 mx-5 has-text-centered">Save

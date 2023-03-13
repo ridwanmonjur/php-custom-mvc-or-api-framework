@@ -53,7 +53,6 @@ class Orm
         } else  {
             $orderBy = $params['orderBy'];
             $sql = "SELECT * FROM  $table ORDER BY $orderBy ASC;";
-            var_dump($orderBy, $sql);
         }
         try {
             $stmt = self::$db->prepare($sql);

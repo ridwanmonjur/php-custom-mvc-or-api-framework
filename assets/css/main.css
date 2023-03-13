@@ -14,3 +14,7 @@ label.label-fix{
     color: black !important;
     margin-left: 15px;
 }
+
+.is-no-opacity{
+    opacity: 0 !important;
+}
