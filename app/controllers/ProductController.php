@@ -9,7 +9,7 @@ class ProductController extends Controller
     static public function index()
     {
         // need to initialize because cannot dependency injection.
-        $data = Product::find();
+        $data = Product::find(["orderBy" => "sku"]);
         (new self)->view("home/index.php", $data);
     }
     static public function show()
@@ -18,8 +18,8 @@ class ProductController extends Controller
     }
     static public function createOrDestroy()
     {
-        // http://localhost/scandiweb-test/
         if (isset($_POST['switcher'])):
+          
             $model = (new self)->model($_POST['switcher']);
             $model->setAttributeFromChild($_POST["attribute"]);
             $arr = [
@@ -35,11 +35,10 @@ class ProductController extends Controller
             $sku = $_POST['sku'];
             Product::destroy($sku);
             header("Refresh:0");
-        else: 
+        else:
             try {
                 throw new Exception('Post inputs incorrect ');
-            }
-            catch (\Exception $error) {
+            } catch (\Exception $error) {
                 die($error);
             }
         endif;
@@ -67,7 +66,5 @@ class ProductController extends Controller
         } catch (\Exception $error) {
             die($error);
         }
-        // $_SERVER['REQUEST_URI'];
-        // require();
     }
 }

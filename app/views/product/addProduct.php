@@ -28,27 +28,29 @@
         <form id="product_form" action="<?php echo getBaseUrl() . "/"; ?>" method="POST" class="mx-5 px-5 py-5 my-5">
             <div class="row">
                 <label class="col-12-sm col-3 label-fix" for="sku">SKU</label>
-                <div class="col-12-sm col-6">
-                    <input class="input" type="text" name="sku" id="sku" placeholder="Strictly alphanumeric and dashes (8-10 digits)"
-                        minlength="8" maxlength="10" required>
+                <div class="col-12-sm col-4">
+                    <input class="input" type="text" name="sku" id="sku" pattern="[a-zA-Z0-9\s]+"
+                        placeholder="Please provide sku." 
+                        required onblur="validateForms(event);">
                 </div>
             </div>
             <div class="row">
                 <label class="col-12-sm col-3 label-fix" for="name">Name</label>
-                <div class="col-12-sm col-6">
-                    <input class="input" type="text" name="name" id="name" placeholder="Insert any alphanumeric characters" required>
+                <div class="col-12-sm col-4">
+                    <input class="input" type="text" pattern="[a-zA-Z0-9\s]+" name="name" id="name"
+                        onblur="validateForms(event);" placeholder="Please provide name." required>
                 </div>
             </div>
             <div class="row">
                 <label class="col-12-sm col-3 label-fix" for="price">Price ($)</label>
-                <div class="col-12-sm col-6">
-                    <input class="input" type="number" step="0.1" name="price" id="price" placeholder="Insert any non-negative number"
-                        required>
+                <div class="col-12-sm col-4">
+                    <input class="input" type="number" min="0"  name="price" id="price"
+                        onblur="validateForms(event);" placeholder="Insert any non-negative number for the price." required>
                 </div>
             </div>
             <div class="row">
                 <label class="col-12-sm col-3 label-fix" for="switcher">Type Switcher</label>
-                <div class="col-12-sm col-6">
+                <div class="col-12-sm col-4">
                     <select class="input" name="switcher" id="productType" required>
                         <option value="" id="none">Type Switcher</option>
                         <option value="Disc" id="Disc_form">DVD</option>
@@ -65,4 +67,5 @@
         </form>
     </main>
     <script src="assets/js/switchForm.js"> </script>
+    <script src="assets/js/validateForm.js"> </script>
     <?php require_once(dirname(__FILE__) . "/../layouts/footer.php"); ?>

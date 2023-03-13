@@ -45,28 +45,28 @@ class Orm
     {
         self::$db = null;
     }
-    public static function find()
+    public static function find($params = [])
     {
-        $sql = "SELECT * FROM  " . self::$table;
+        $table = self::$table;
+        if (empty($params) && array_key_exists("orderBy", $params)) {
+            $sql = "SELECT * FROM  $table;";
+        } else  {
+            $orderBy = $params['orderBy'];
+            $sql = "SELECT * FROM  $table ORDER BY $orderBy ASC;";
+            var_dump($orderBy, $sql);
+        }
         try {
-            $query = self::$db->query($sql)->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, self::$class);
-            return $query;
-        }catch (PDOException $error) {
+            $stmt = self::$db->prepare($sql);
+            $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, self::$class);
+            $stmt->execute();
+            $results = $stmt->fetchAll();
+            return $results;
+        } catch (PDOException $error) {
             die($error->getMessage());
         }
     }
 
-    public static function findAssoc()
-    {
-        $sql = "SELECT * FROM  " . self::$table;
 
-        try {
-            $query = self::$db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-            return $query;
-        }catch (PDOException $error) {
-            die($error->getMessage());
-        }
-    }
 
     public static function create($data)
     {

@@ -11,9 +11,9 @@ function deleteForm(event) {
     }
     if (is_checked) {
         form.submit();
+        return true;
     }
-    else {
-        M.toast({html: 'You should check one of the checkboxes to delete!'})
-        return false;
-    }
+    alert("Error! ");
+    return false;
+
 }

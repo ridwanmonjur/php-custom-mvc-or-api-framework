@@ -1,6 +1,5 @@
 <?php $title = "Product List" ?>
 <?php require_once(dirname(__FILE__) . "/../layouts/header.php"); ?>
-<script src="assets/js/deleteForm.js"> </script>
 
 <body>
     <nav class="navbar is-warning py-5">

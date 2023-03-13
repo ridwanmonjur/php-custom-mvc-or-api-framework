@@ -1,7 +1,7 @@
 <div class="row">
     <label class="col-12-sm col-3 label-fix" for="weight">Weight (KG)</label>
-    <div class="col-12-sm col-6">
-        <input type="number" class="input" id="weight" name="attribute[weight]" required>
+    <div class="col-12-sm col-4">
+        <input type="number" class="input" id="weight" min="0" name="attribute[weight]" required placeholder="Please provide weight.">
     </div>
 </div>
 
