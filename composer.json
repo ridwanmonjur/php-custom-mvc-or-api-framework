@@ -6,6 +6,7 @@
         "files": [ "core/utility/getPattern.php", "core/utility/print_apple.php" ]
     },
     "require": {
-        "vlucas/phpdotenv": "^5.5"
+        "vlucas/phpdotenv": "^5.5",
+        "rakit/validation": "^1.4"
     }
 }

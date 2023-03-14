@@ -3,7 +3,7 @@
     <div class="row">
         <label class="col-12-sm col-3 label-fix" for="height">Height (CM)</label>
         <div class="col-12-sm col-4">
-            <input type="number" class="input" id="height" min="0" name="attribute[height]" required disabled
+            <input type="number" class="input" id="height" min="0" name="attribute[height]" required disabled onblur="validateForms(event);"
                 placeholder="Please provide height.">
         </div>
     </div>
@@ -11,7 +11,7 @@
     <div class="row">
         <label class="col-12-sm col-3 label-fix" for="width">Width (CM)</label>
         <div class="col-12-sm col-4">
-            <input type="number" class="input" id="width" min="0" name="attribute[width]" required disabled
+            <input type="number" class="input" id="width" min="0" name="attribute[width]" required disabled onblur="validateForms(event);"
                 placeholder="Please provide width.">
         </div>
     </div>
@@ -19,7 +19,7 @@
     <div class="row">
         <label class="col-12-sm col-3 label-fix" for="length">Length (CM)</label>
         <div class="col-12-sm col-4">
-            <input type="number" class="input" id="length" min="0" name="attribute[length]" required disabled
+            <input type="number" class="input" id="length" min="0" name="attribute[length]" required disabled onblur="validateForms(event);"
                 placeholder="Please provide length.">
         </div>
     </div>

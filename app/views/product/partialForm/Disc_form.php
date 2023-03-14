@@ -3,7 +3,7 @@
         <label class="col-12-sm col-3 label-fix" for="size">Size (MB)</label>
 
         <div class="col-12-sm col-4 label-fix">
-            <input type="number" class="input" id="size" min="0" name="attribute[size]" required  disabled
+            <input type="number" class="input" id="size" min="0" name="attribute[size]" required  disabled onblur="validateForms(event);"
                 placeholder="Please provide size.">
         </div>
 

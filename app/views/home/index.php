@@ -2,9 +2,19 @@
 <?php require_once(dirname(__FILE__) . "/../layouts/header.php"); ?>
 
 <body>
+    <?php
+    session_start();
+    $errors = [];
+    $count = 0;
+    $baseUrl = getBaseUrl();
+    if (isset($_SESSION["errors"])) {
+        $errors = $_SESSION["errors"];
+    }
+    $count = count($errors);
+    ?>
     <nav class="navbar is-warning py-5">
         <div class="navbar-brand px-5 mx-5">
-            <a class="navbar-item" href="<?= getBaseUrl() ?>">
+            <a class="navbar-item" href="<?= $baseUrl ?>">
                 Product List
             </a>
             <div class="navbar-burger burger" data-target="navMenubd-example">
@@ -26,9 +36,20 @@
     </nav>
     <main id="body">
         <div>
-            <form id="delete_form" action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="POST" class="py-5 mx-5"
-                onsubmit="deleteForm(event);">
+            <form id="delete_form" action="<?php echo $_SERVER['REQUEST_URI']; ?>deleteProduct" method="POST"
+                class="py-5 mx-5" onsubmit="deleteForm(event);">
                 <div class="row py-5 px-5">
+                    <?php if ($count > 0): ?>
+                        <div class="notification is-danger is-light col-12-sm col-5">
+                            <ul>
+                                <?php foreach ($errors as $error): ?>
+                                    <li> <?= $error ?> </li>
+                                <?php endforeach; ?>
+
+                            </ul>
+                        </div>
+                    <?php endif; ?>
+
                     <?php foreach ($data as $index => $product): ?>
 
                         <div class="col-12-sm col-4 is-one-quarter-widescreen">
@@ -63,5 +84,7 @@
             </form>
         </div>
     </main>
+    <!-- <script src="assets/js/deleteForm.js"> </script> -->
 
     <?php require_once(dirname(__FILE__) . "/../layouts/footer.php"); ?>
+    <?php require_once(dirname(__FILE__) . "/../layouts/session.php"); ?>

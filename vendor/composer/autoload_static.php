@@ -21,6 +21,10 @@ class ComposerStaticInitffa59f34a7f11d08d438dd4d48de3e4b
             'Symfony\\Polyfill\\Mbstring\\' => 26,
             'Symfony\\Polyfill\\Ctype\\' => 23,
         ),
+        'R' => 
+        array (
+            'Rakit\\Validation\\' => 17,
+        ),
         'P' => 
         array (
             'PhpOption\\' => 10,
@@ -51,6 +55,10 @@ class ComposerStaticInitffa59f34a7f11d08d438dd4d48de3e4b
         'Symfony\\Polyfill\\Ctype\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
+        ),
+        'Rakit\\Validation\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/rakit/validation/src',
         ),
         'PhpOption\\' => 
         array (

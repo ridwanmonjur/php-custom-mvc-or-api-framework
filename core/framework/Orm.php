@@ -27,7 +27,7 @@ class Orm
             $options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION];
             self::$db = new PDO($dsn, $user, $password, $options);
         } catch (PDOException $error) {
-            die($error->getMessage());
+            throw $error;
         }
     }
 
@@ -61,7 +61,7 @@ class Orm
             $results = $stmt->fetchAll();
             return $results;
         } catch (PDOException $error) {
-            die($error->getMessage());
+            throw $error;
         }
     }
 
@@ -78,7 +78,7 @@ class Orm
             return $query;
 
         } catch (PDOException $error) {
-            die($error->getMessage());
+            throw $error;
         }
     }
 
@@ -97,7 +97,7 @@ class Orm
             self::$db->commit();
         } catch (PDOException $error) {
             self::$db->rollback();
-            die($error->getMessage());
+            throw $error;
         }
     }
 
@@ -109,7 +109,7 @@ class Orm
             $sql = "DELETE FROM $table";
             self::$db->exec($sql);
         } catch (PDOException $error) {
-            die($error->getMessage());
+            throw $error;
         }
     }
 
@@ -117,9 +117,8 @@ class Orm
     {
         try {
             return self::$db->exec($sql);
-        } catch (PDOException $e) {
-            $error = $e->getMessage();
-            return $error;
+        } catch (PDOException $error) {
+            throw $error;
         }
     }
 

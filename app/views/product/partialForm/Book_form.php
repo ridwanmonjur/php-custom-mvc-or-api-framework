@@ -3,7 +3,7 @@
     <div class="row">
         <label class="col-12-sm col-3 label-fix" for="weight">Weight (KG)</label>
         <div class="col-12-sm col-4">
-            <input type="number" class="input" id="weight" min="0" name="attribute[weight]" required disabled
+            <input type="number" class="input" id="weight" min="0" name="attribute[weight]" required disabled onblur="validateForms(event);"
                 placeholder="Please provide weight.">
         </div>
     </div>
