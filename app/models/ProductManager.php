@@ -18,45 +18,65 @@ class ProductManager
 
     public function find($params = [])
     {
-        $sql = "SELECT 
-            sku, GROUP_CONCAT(value SEPARATOR 'x') AS attribute,
-            name, price, unit, type
-            FROM 
-            (SELECT 
-            product.sku, product.name, product.price, product.type,
-            product_attribute.value,
-            attribute.name AS `attributeName`, 
-            attribute.unit
+        $sql = "SELECT *           
             FROM `product` 
-            INNER JOIN `product_attribute` 
-            ON product_attribute.product_sku = product.sku 
-            INNER JOIN `attribute`
-            ON product_attribute.attribute_id = attribute.id 
-            ORDER BY product.sku 
-            LIMIT 0, 25
-            ) 
-            table2 
-            GROUP BY sku;";
+            ORDER BY sku;";
         try {
             $this->qb->query($sql);
             $this->qb->setFetchMode(PDO::FETCH_ASSOC);
             $results = $this->qb->getResultSet();
-            // print_pre_formatted($results);
 
             $models = [];
-
             foreach ($results as $result) {
                 $model = $this->getProductChild($result["type"]);
                 $model->validate($result);
                 array_push($models, $model);
             }
-            print_pre_formatted($models, $results);
-
             return $models;
         } catch (PDOException $error) {
             throw $error;
         }
     }
+
+    public function create($arrProduct)
+    {
+        $model = $this->getProductChild($arrProduct["type"]);
+        $model->setAttribute($arrProduct["attribute"]);
+        $pre = $arrProduct["attribute"];
+        print_pre_formatted($arrProduct, $pre) ;
+
+        $arrProduct["attribute"] =  $model->getAttribute();
+        print_pre_formatted($arrProduct, $pre, $arrProduct["attribute"]) ;
+        $values = implode(',', array_map(function ($x) {
+            return "'" . $x . "'";
+        }, $arrProduct));
+        $keys = implode(',', array_keys($arrProduct));
+        $sql = "INSERT INTO product ($keys) VALUES ($values);";
+        try {
+            $this->qb->query($sql);
+            $this->qb->execute();
+        } catch (PDOException $error) {
+            throw $error;
+        }
+    }
+
+    public function destroy($ids)
+    {
+        $sql = "DELETE FROM `product` WHERE sku= :id;";
+        try {
+            $this->qb->beginTransaction();
+            foreach ($ids as $id) {
+                $this->qb->query($sql);
+                $this->qb->bind(':id', $id);
+                $this->qb->execute();
+            }
+            $this->qb->commit();
+        } catch (PDOException $error) {
+            $this->qb->rollback();
+            throw $error;
+        }
+    }
+
 
     function getProductChild($modelName, ...$modelArgs)
     {

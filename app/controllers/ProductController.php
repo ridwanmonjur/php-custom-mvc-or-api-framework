@@ -4,8 +4,6 @@ namespace App\Controllers;
 
 use Illuminate\Controller;
 use Rakit\Validation\Validator;
-use App\Models\ProductManager;
-
 
 class ProductController extends Controller
 {
@@ -33,88 +31,64 @@ class ProductController extends Controller
     }
     public function create()
     {
-        // session_start();
-        // try {
-        //     if (isset($_POST['switcher'])):
-        //         $validator = new Validator;
-        //         $validation = $validator->validate($_POST, [
-        //             'sku' => 'required|alpha_num',
-        //             'name' => 'required',
-        //             'price' => 'required|numeric|min:0|max:99999',
-        //             'switcher' => [
-        //                 'required',
-        //                 function ($value) {
-        //                     return in_array($value, ["Furniture", "Book", "Disc"]) ?? ":value is not valid.";
-        //                 }
-        //             ],
-        //             'attribute' => [
-        //                 'required',
-        //                 function ($value) {
-        //                     $validity1 = false;
-        //                     $validity2 = false;
-        //                     $attributeys = array_keys($_POST["attribute"]);
-        //                     if ($_POST["switcher"] == "Furniture") {
-        //                         $validity1 = $attributeys == ["length", "width", "height"] ?? false;
-        //                         $validity2 = is_numeric($_POST["attribute"]["length"])
-        //                             && is_numeric($_POST["attribute"]["width"])
-        //                             && is_numeric($_POST["attribute"]["height"]);
-        //                     } else if ($_POST["switcher"] == "Book") {
-        //                         $validity1 = key_exists("weight", $_POST["attribute"]) ?? false;
-        //                         $validity2 = is_numeric($_POST["attribute"]["weight"]);
-        //                     } else if ($_POST["switcher"] == "Disc") {
-        //                         $validity1 = key_exists("size", $_POST["attribute"]) ?? false;
-        //                         $validity2 = is_numeric($_POST["attribute"]["size"]);
-        //                     }
-        //                     return ($validity1 && $validity2) ? true : "Wrong choice :value inputted";
-        //                 }
-        //             ]
-        //         ]);
-        //         if ($validation->fails()) {
-        //             $errors = $validation->errors()->all();
-        //             $_SESSION["formErrors"] = $errors;
-        //             header("Location: " . getBaseUrl() . "/addProduct");
-        //         } else {
-        //             if (isset($_SESSION['formErrors'])) {
-        //                 unset($_SESSION["formErrors"]);
-        //             }
-        //             $model = (new self)->model($_POST['switcher']);
-        //             $model->setAttributeFromChild($_POST["attribute"]);
-        //             $arr = [
-        //                 "sku" => $_POST["sku"],
-        //                 "name" => $_POST["name"],
-        //                 "price" => $_POST["price"],
-        //                 "type" => $_POST["switcher"],
-        //                 "attribute" => $model->getAttribute()
-        //             ];
-
-        //             $model->create($arr);
-        //             header("Location: " . getBaseUrl());
-        //         }
-        //     else:
-        //        throw new Exception("Product type is not set!");
-        //     endif;
-        // } catch (\Exception $error) {
-        //     $_SESSION["formErrors"] = [$error->getMessage()];
-        //     header("Location: " . getBaseUrl() . "/addProduct");
-        // }
+        session_start();
+        try {
+            if (!isset($_POST['switcher'])):
+                throw new \Exception("Product type is not set!");
+            endif;
+            $validator = new Validator;
+            $validation = $validator->validate($_POST, [
+                'sku' => 'required|alpha_num',
+                'name' => 'required',
+                'price' => 'required|numeric|min:0|max:99999',
+                'switcher' => [
+                    'required',
+                    function ($value) {
+                        return in_array($value, ["Furniture", "Book", "Disc"]) ?? ":value is not valid.";
+                    }
+                ],
+                'attribute' => ['required']
+            ]);
+            if ($validation->fails()) {
+                $errors = $validation->errors()->all();
+                $_SESSION["formErrors"] = $errors;
+                header("Location: " . getBaseUrl() . "/addProduct");
+            } else {
+                if (isset($_SESSION["formErrors"])) {
+                    unset($_SESSION["formErrors"]);
+                }
+                $arrProduct = [
+                    "sku" => $_POST["sku"],
+                    "name" => $_POST["name"],
+                    "price" => $_POST["price"],
+                    "type" => $_POST["switcher"],
+                    "attribute" => $_POST["attribute"] 
+                ];
+               
+                $this->productManager->create($arrProduct);
+                header("Location: " . getBaseUrl());
+            }
+        } catch (\Exception $error) {
+            $_SESSION["formErrors"] = [$error->getMessage()];
+            header("Location: " . getBaseUrl() . "/addProduct");
+        }
     }
     public function destroy()
     {
-        // session_start();
-        // try{
-        // if (isset($_POST['sku'])):
-        //     $sku = $_POST['sku'];
-        //     Product::destroy($sku);
-        // else:
-        //     throw new Exception("Product sku is not selected!");
-        // endif;
-        // }
-        // catch (\Exception $error) {
-        //     $_SESSION["errors"] = [$error->getMessage()];
-        //     header("Location: " . getBaseUrl() );
-        // }
-      
-        // header("Location: " . getBaseUrl());
+        session_start();
+        try {
+            if (isset($_POST['sku'])):
+                $sku = $_POST['sku'];
+                $this->productManager->destroy($sku);
+            else:
+                throw new \Exception("Product sku is not selected!");
+            endif;
+        } catch (\Exception $error) {
+            $_SESSION["errors"] = [$error->getMessage()];
+            header("Location: " . getBaseUrl());
+        }
+
+        header("Location: " . getBaseUrl());
     }
 
     public function reset()

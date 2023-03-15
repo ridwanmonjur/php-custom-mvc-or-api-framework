@@ -14,14 +14,22 @@ class Book extends Product
 
     }
 
-    public function setAttribute($array){
-        var_dump($array);
-        $this->weight = $array["weight"] ;
+    public function setAttribute($arrayOrString)
+    {
+        // convert from post form to presentation form 
+        if (is_array($arrayOrString)) {
+            $this->weight = "{$arrayOrString['weight']} KG";
+        }
+        else{
+        // convert from db form to presentation form (same)
+            $this->weight = $arrayOrString;
+        }
     }
-    public function getAttribute(){
-        return [
-            "weight"=> $this->weight,
-        ];
+    public function getAttribute()
+    {
+        // presentation form
+        // same as db form
+        return $this->weight;
     }
 
 }

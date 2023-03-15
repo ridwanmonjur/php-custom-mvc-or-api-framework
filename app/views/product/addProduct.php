@@ -39,7 +39,7 @@
             novalidate>
             <div class="row">
                 <?php if ($count > 0): ?>
-                    <div class="notification is-danger is-light col-12-sm col-5">
+                    <div class="notification is-danger is-light col-12-sm col-9">
                         <ul>
                             <?php foreach ($errors as $error): ?>
                                 <li>

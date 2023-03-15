@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `trial`
+-- Database: `scandiwebdevelopertest`
 --
 
 -- --------------------------------------------------------
@@ -44,8 +44,8 @@ INSERT INTO `product` (`sku`, `name`, `price`, `type`, `attribute`) VALUES
 ('DVD001', 'FRIENDS', 10, 'disc', '120 MB'),
 ('DVD002', 'WITCHER', 10, 'disc', '120 MB'),
 ('DVD003', 'DAT', 10, 'disc', '120 MB'),
-('FURNITURE000', 'Chair', 20, 'furniture', '30x10x10'),
-('FURNITURE001', 'Table', 20, 'furniture', '30x10x10');
+('FURNITURE000', 'Chair', 20, 'furniture', '30x10x10 CM'),
+('FURNITURE001', 'Table', 20, 'furniture', '30x10x10 CM');
 
 --
 -- Indexes for dumped tables
@@ -61,38 +61,3 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
-/*
-SELECT 
-product.sku, product.name, product.price, 
-product_attribute.value, 
-attribute.name, attribute.unit
-FROM `product` 
-INNER JOIN `product_attribute` 
-ON product_attribute.product_sku = product.sku 
-INNER JOIN `attribute`
-ON product_attribute.attribute_id = attribute.id 
-ORDER BY product.sku
-LIMIT 0, 25;
-
-SELECT 
-sku, GROUP_CONCAT(value SEPARATOR 'x') AS attribute,
-name, price, unit
-FROM 
-(SELECT 
-product.sku, product.name, product.price, 
-product_attribute.value,
-attribute.name AS `attributeName`, 
-attribute.unit
-FROM `product` 
-INNER JOIN `product_attribute` 
-ON product_attribute.product_sku = product.sku 
-INNER JOIN `attribute`
-ON product_attribute.attribute_id = attribute.id 
-ORDER BY product.sku 
-LIMIT 0, 25
-) 
-table2 
-GROUP BY sku;
-
-*/

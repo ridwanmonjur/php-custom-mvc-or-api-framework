@@ -67,6 +67,22 @@ class QueryBuilder
         $this->stmt->bindValue($param, $value, $type);
     }
 
+    
+    public function beginTransaction()
+    {
+        self::$db->beginTransaction();
+    }
+
+    public function commit()
+    {
+        self::$db->commit();
+    }
+
+    public function rollback()
+    {
+        self::$db->rollback();
+    }
+
     public function execute()
     {
         $this->stmt->execute();
@@ -85,7 +101,6 @@ class QueryBuilder
     }
     public function setFetchMode($mode)
     {
-        // $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, self::$class);
         return $this->stmt->setFetchMode($mode);
     }
 }

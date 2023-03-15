@@ -39,7 +39,7 @@
                 class="py-5 mx-5" onsubmit="deleteForm(event);">
                 <div class="row py-5 px-5">
                     <?php if ($count > 0): ?>
-                        <div class="notification is-danger is-light col-12-sm col-5">
+                        <div class="notification is-danger is-light col-12-sm col-9">
                             <ul>
                                 <?php foreach ($errors as $error): ?>
                                     <li>
@@ -70,17 +70,9 @@
                                             <?= $product->getPrice() ?> $
                                         </p>
                                         <p class="">
-                                            <?php if (1): ?>
-                                            <div>
-                                                <ul>
-                                                    <?php foreach ($product->getAttribute() as $attribute): ?>
-                                                        <li>
-                                                            <?= $attribute ?>
-                                                        </li>
-                                                    <?php endforeach; ?>
-                                                </ul>
-                                            </div>
-                                        <?php endif; ?>
+                                        <?= $product->getAttribute() ?> 
+                                        </p>
+
                                     </div>
                                 </div>
                             </div>

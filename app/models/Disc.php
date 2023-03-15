@@ -16,13 +16,17 @@ class Disc extends Product
         $this->type = "disc";
     }
 
-    public function setAttribute($array){
-        $this->size= $array['size'];
+    public function setAttribute($arrayOrString){
+        if (is_array($arrayOrString)) {
+            $this->size = "{$arrayOrString['size']} MB";
+        }
+        else{
+            $this->size = $arrayOrString;
+        }
     }
     public function getAttribute(){
-        return [
-            "size"=> $this->size,
-        ];
+        return $this->size;
+    
     }
 
 

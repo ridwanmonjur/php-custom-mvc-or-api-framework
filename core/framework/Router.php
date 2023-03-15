@@ -56,8 +56,6 @@ class Router
             header("Access-Control-Allow-Methods: " . $_SERVER['REQUEST_METHOD']);
             // call controller
             $arr = explode('@', $controllerName);
-            // print_pre_formatted($arr);
-            // print_pre_formatted("App\Controllers\\" . $arr[0] . "::" . $arr[1]);
             $class = "App\Controllers\\" . $arr[0];
             $container = new Container();
             $object = $container->getContainer()->get($class);
