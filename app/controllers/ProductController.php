@@ -27,6 +27,7 @@ class ProductController extends Controller
     }
     public function show()
     {
+        session_start();
         $this->view("product/addProduct.php");
     }
     public function create()
@@ -62,9 +63,9 @@ class ProductController extends Controller
                     "name" => $_POST["name"],
                     "price" => $_POST["price"],
                     "type" => $_POST["switcher"],
-                    "attribute" => $_POST["attribute"] 
+                    "attribute" => $_POST["attribute"]
                 ];
-               
+
                 $this->productManager->create($arrProduct);
                 header("Location: " . getBaseUrl());
             }
@@ -93,31 +94,24 @@ class ProductController extends Controller
 
     public function reset()
     {
-        // $sql = "INSERT INTO `product` (`sku`, `name`, `price`, `type`, `attribute`) VALUES
-        // ('BOOK000', 'Harry Potter and the Cursed Child', 50, 'book', '2 KG'),
-        // ('DISC000', 'Movie: Titanic', 10, 'disc', '120 MB'),
-        // ('DISC001', 'Movie: The Gladiator', 10, 'disc', '120 MB'),
-        // ('DISC002', 'Movie: The Dark Knight', 10, 'disc', '120 MB'),
-        // ('FURNITURE000', 'Blue chair', 20, 'furniture', '30x10x10'),
-        // ('FURNITURE001', 'Read Chair chair', 20, 'furniture', '30x10x10');";
-        // try {
-        //     Product::destroyMany();
-        //     Product::exec($sql);
-        //     header("Location: " . getBaseUrl());
-        // } catch (\Exception $error) {
-        //     die($error);
-        // }
+        try {
+            $this->productManager->destroyMany();
+            $this->productManager->createMany();
+            header("Location: " . getBaseUrl());
+        } catch (\Exception $error) {
+            die($error);
+        }
     }
     public function serve()
     {
-        // try {
-        //     if (file_exists($_SERVER['REQUEST_URI'])) {
-        //         require($_SERVER['REQUEST_URI']);
-        //     } else {
-        //         throw new Exception('File doesn\'t exist');
-        //     }
-        // } catch (\Exception $error) {
-        //     die($error);
-        // }
+        try {
+            if (file_exists($_SERVER['REQUEST_URI'])) {
+                require($_SERVER['REQUEST_URI']);
+            } else {
+                throw new \Exception('File doesn\'t exist');
+            }
+        } catch (\Exception $error) {
+            die($error);
+        }
     }
 }

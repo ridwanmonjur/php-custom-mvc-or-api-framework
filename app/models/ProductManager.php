@@ -43,10 +43,10 @@ class ProductManager
         $model = $this->getProductChild($arrProduct["type"]);
         $model->setAttribute($arrProduct["attribute"]);
         $pre = $arrProduct["attribute"];
-        print_pre_formatted($arrProduct, $pre) ;
+        print_pre_formatted($arrProduct, $pre);
 
-        $arrProduct["attribute"] =  $model->getAttribute();
-        print_pre_formatted($arrProduct, $pre, $arrProduct["attribute"]) ;
+        $arrProduct["attribute"] = $model->getAttribute();
+        print_pre_formatted($arrProduct, $pre, $arrProduct["attribute"]);
         $values = implode(',', array_map(function ($x) {
             return "'" . $x . "'";
         }, $arrProduct));
@@ -73,6 +73,32 @@ class ProductManager
             $this->qb->commit();
         } catch (PDOException $error) {
             $this->qb->rollback();
+            throw $error;
+        }
+    }
+    public function destroyMany()
+    {
+        $sql = "DELETE FROM `product`";
+        try {
+            $this->qb->query($sql);
+            $this->qb->execute();
+        } catch (PDOException $error) {
+            throw $error;
+        }
+    }
+    public function createMany()
+    {
+        $sql = "INSERT INTO `product` (`sku`, `name`, `price`, `type`, `attribute`) VALUES
+        ('BOOK000', 'Harry Potter and the Cursed Child', 50, 'book', '2 KG'),
+        ('DISC000', 'Movie: Titanic', 10, 'disc', '120 MB'),
+        ('DISC001', 'Movie: The Gladiator', 10, 'disc', '120 MB'),
+        ('DISC002', 'Movie: The Dark Knight', 10, 'disc', '120 MB'),
+        ('FURNITURE000', 'Blue chair', 20, 'furniture', '30x10x10 CM'),
+        ('FURNITURE001', 'Read Chair chair', 20, 'furniture', '30x10x10 CM');";
+        try {
+            $this->qb->query($sql);
+            $this->qb->execute();
+        } catch (PDOException $error) {
             throw $error;
         }
     }

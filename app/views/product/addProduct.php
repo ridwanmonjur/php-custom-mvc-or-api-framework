@@ -3,15 +3,14 @@
 
 <body>
     <?php
-    session_start();
     $baseUrl = getBaseUrl();
     $count = 0;
     $errors = [];
     $baseUrl = getBaseUrl();
     if (isset($_SESSION["formErrors"])) {
         $errors = $_SESSION["formErrors"];
+        $count = count($errors);
     }
-    $count = count($errors);
     ?>
     <nav class="navbar is-warning py-5">
         <div class="navbar-brand px-5 mx-5">
