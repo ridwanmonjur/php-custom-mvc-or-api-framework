@@ -1,9 +1,8 @@
 <?php
-namespace App;
 
-require_once  realpath(".") . '/app/' . 'controllers/ProductController.php';
+namespace App\Routes;
 
-use Core\Router;
+use Illuminate\Router;
 
 $router = new Router();
 

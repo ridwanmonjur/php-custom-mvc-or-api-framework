@@ -1,9 +1,8 @@
 <?php $title = "Product List" ?>
-<?php require_once(dirname(__FILE__) . "/../layouts/header.php"); ?>
+<?php require_once realpath(".") . '/app/views/' . 'layouts/header.php'; ?>
 
 <body>
     <?php
-    session_start();
     $errors = [];
     $count = 0;
     $baseUrl = getBaseUrl();
@@ -43,9 +42,10 @@
                         <div class="notification is-danger is-light col-12-sm col-5">
                             <ul>
                                 <?php foreach ($errors as $error): ?>
-                                    <li> <?= $error ?> </li>
+                                    <li>
+                                        <?= $error ?>
+                                    </li>
                                 <?php endforeach; ?>
-
                             </ul>
                         </div>
                     <?php endif; ?>
@@ -70,7 +70,17 @@
                                             <?= $product->getPrice() ?> $
                                         </p>
                                         <p class="">
-                                            <?= $product->getAttribute() ?>
+                                            <?php if (1): ?>
+                                            <div>
+                                                <ul>
+                                                    <?php foreach ($product->getAttribute() as $attribute): ?>
+                                                        <li>
+                                                            <?= $attribute ?>
+                                                        </li>
+                                                    <?php endforeach; ?>
+                                                </ul>
+                                            </div>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             </div>
@@ -85,6 +95,5 @@
         </div>
     </main>
     <!-- <script src="assets/js/deleteForm.js"> </script> -->
-
-    <?php require_once(dirname(__FILE__) . "/../layouts/footer.php"); ?>
-    <?php require_once(dirname(__FILE__) . "/../layouts/session.php"); ?>
+    <?php require_once realpath(".") . '/app/views/' . 'layouts/footer.php'; ?>
+    <?php require_once realpath(".") . '/app/views/' . 'layouts/session.php'; ?>

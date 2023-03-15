@@ -1,12 +1,20 @@
 {
+    "name": "scandiweb-test/ridwan",
+    "description": "This is my test application!",
     "autoload": {
         "psr-4": {
-             "Core\\": "core/framework"
+            "Illuminate\\": "core/framework",
+            "App\\Controllers\\": "app/controllers",
+            "App\\Models\\": "app/models"
         },
-        "files": [ "core/utility/getPattern.php", "core/utility/print_apple.php" ]
+        "files": [
+            "core/utility/getPattern.php",
+            "core/utility/print_apple.php"
+        ]
     },
     "require": {
         "vlucas/phpdotenv": "^5.5",
-        "rakit/validation": "^1.4"
+        "rakit/validation": "^1.4",
+        "php-di/php-di": "^6.4"
     }
 }

@@ -1,23 +1,27 @@
 <?php
 
-require_once realpath(".") . '/app/models/' . 'Product.php';
+namespace App\Models;
+
+use App\Models\Product;
 
 class Book extends Product
 {
-    protected $type;
     private $weight;
 
     public function __construct(
     )
     {
-        $this->type = "book";
-        parent::__construct($this->type);
+
     }
 
-    public function setAttributeFromChild($attributeLst)
-    {
-        $this->weight = $attributeLst["weight"];
-        $this->setAttribute("{$this->weight} KG");
+    public function setAttribute($array){
+        var_dump($array);
+        $this->weight = $array["weight"] ;
+    }
+    public function getAttribute(){
+        return [
+            "weight"=> $this->weight,
+        ];
     }
 
 }

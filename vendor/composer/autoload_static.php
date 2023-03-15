@@ -10,8 +10,9 @@ class ComposerStaticInitffa59f34a7f11d08d438dd4d48de3e4b
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
-        '0bd01a65e196df7ebf6b8ae8272e2e30' => __DIR__ . '/../..' . '/core/utility/getPattern.php',
-        'c809c2bdee6cd36874b5b0391356e885' => __DIR__ . '/../..' . '/core/utility/print_apple.php',
+        'b33e3d135e5d9e47d845c576147bda89' => __DIR__ . '/..' . '/php-di/php-di/src/functions.php',
+        '8de9c8536169c7442abb4a43dd1df2f8' => __DIR__ . '/../..' . '/core/utility/getPattern.php',
+        '407ebf1e1b65c4b3b85cfe1c2eb36c57' => __DIR__ . '/../..' . '/core/utility/print_apple.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -27,7 +28,18 @@ class ComposerStaticInitffa59f34a7f11d08d438dd4d48de3e4b
         ),
         'P' => 
         array (
+            'Psr\\Container\\' => 14,
             'PhpOption\\' => 10,
+            'PhpDocReader\\' => 13,
+        ),
+        'L' => 
+        array (
+            'Laravel\\SerializableClosure\\' => 28,
+        ),
+        'I' => 
+        array (
+            'Invoker\\' => 8,
+            'Illuminate\\' => 11,
         ),
         'G' => 
         array (
@@ -36,10 +48,12 @@ class ComposerStaticInitffa59f34a7f11d08d438dd4d48de3e4b
         'D' => 
         array (
             'Dotenv\\' => 7,
+            'DI\\' => 3,
         ),
-        'C' => 
+        'A' => 
         array (
-            'Core\\' => 5,
+            'App\\Models\\' => 11,
+            'App\\Controllers\\' => 16,
         ),
     );
 
@@ -60,9 +74,29 @@ class ComposerStaticInitffa59f34a7f11d08d438dd4d48de3e4b
         array (
             0 => __DIR__ . '/..' . '/rakit/validation/src',
         ),
+        'Psr\\Container\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/container/src',
+        ),
         'PhpOption\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpoption/phpoption/src/PhpOption',
+        ),
+        'PhpDocReader\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/php-di/phpdoc-reader/src/PhpDocReader',
+        ),
+        'Laravel\\SerializableClosure\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/laravel/serializable-closure/src',
+        ),
+        'Invoker\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/php-di/invoker/src',
+        ),
+        'Illuminate\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/core/framework',
         ),
         'GrahamCampbell\\ResultType\\' => 
         array (
@@ -72,9 +106,17 @@ class ComposerStaticInitffa59f34a7f11d08d438dd4d48de3e4b
         array (
             0 => __DIR__ . '/..' . '/vlucas/phpdotenv/src',
         ),
-        'Core\\' => 
+        'DI\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/core/framework',
+            0 => __DIR__ . '/..' . '/php-di/php-di/src',
+        ),
+        'App\\Models\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/app/models',
+        ),
+        'App\\Controllers\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/app/controllers',
         ),
     );
 

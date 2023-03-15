@@ -1,24 +1,29 @@
 <?php
 
-require_once realpath(".") . '/app/models/' . 'Product.php';
+
+namespace App\Models;
+
+use App\Models\Product;
 
 
 class Disc extends Product
 {
-    protected $type;
     private $size;
 
     public function __construct(
     )
     {
         $this->type = "disc";
-        parent::__construct($this->type);
     }
 
-    public function setAttributeFromChild($attributeLst)
-    {
-        $this->size = $attributeLst["size"];
-        $this->setAttribute("{$this->size} MB");
+    public function setAttribute($array){
+        $this->size= $array['size'];
     }
+    public function getAttribute(){
+        return [
+            "size"=> $this->size,
+        ];
+    }
+
 
 }

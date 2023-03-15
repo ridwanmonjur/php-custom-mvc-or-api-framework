@@ -1,46 +1,53 @@
 <?php
 
-use Core\Model;
 
-abstract class Product extends Model
+namespace App\Models;
+
+abstract class Product
 {
     protected $name;
     protected $price;
     protected $sku;
     protected $attribute;
-    protected $tableName;
-    protected $className;
+    protected $qb;
     protected $type;
 
-    public function __construct(
-        $type
-    )
+    public function __construct()
     {
-        $this->tableName = "product";
-        $this->className = $this->type;
-        parent::__construct($this->tableName, $this->type);
     }
-
-    static public function setOrmTableValues(
-    )
-    {
-        self::$table = "product";
-        self::$class = "book";
-    }
-
-    abstract public function setAttributeFromChild($attributeLst);
+    abstract public function setAttribute($array);
+    abstract public function getAttribute();
 
     public function validate(
-        string $name,
-        float $price,
-        string $sku,
-        string $attributeLst
+        $array
     )
     {
-        $this->name = $name;
-        $this->price = $price;
-        $this->sku = $sku;
-        $this->attribute = $this->setAttributeFromChild($attributeLst);
+        $this->setName($array["name"]);
+        $this->setPrice($array["price"]);
+        $this->setSku($array["sku"]);
+        $this->setAttribute($this->preprocessAttribute($array["attribute"]));
+    }
+
+    public function preprocessAttribute(
+        $arrayOrString
+    )
+    {
+        print_pre_formatted($arrayOrString);
+
+        if (is_array($arrayOrString)) {
+            return $arrayOrString;
+        } else {
+            print_pre_formatted($arrayOrString);
+            $arrValues = explode('x', $arrayOrString);
+            if ($this->type == "furniture") {
+                return ["length" => $arrValues[0], "width" => $arrValues[1], "height" => $arrValues[2]];
+            } else if ($this->type == "disc") {
+                return ["size" => $arrValues[0]];
+
+            } else {
+                return ["weight" => $arrValues[0]];
+            }
+        }
     }
 
     public function setName($name)
@@ -58,11 +65,6 @@ abstract class Product extends Model
         $this->sku = $sku;
     }
 
-    public function setAttribute($attribute)
-    {
-        $this->attribute = $attribute;
-    }
-
     public function getName()
     {
         return $this->name;
@@ -76,11 +78,6 @@ abstract class Product extends Model
     public function getSku()
     {
         return $this->sku;
-    }
-
-    public function getAttribute()
-    {
-        return $this->attribute;
     }
 
 }

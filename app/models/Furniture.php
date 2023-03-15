@@ -1,11 +1,12 @@
 <?php
 
-require_once realpath(".") . '/app/models/' . 'Product.php';
 
+namespace App\Models;
+
+use App\Models\Product;
 
 class Furniture extends Product
 {
-    protected $type;
     private $height;
     private $width;
     private $length;
@@ -14,15 +15,21 @@ class Furniture extends Product
     public function __construct(
     )
     {
-        $this->type = "furniture";
-        parent::__construct($this->type);
+        $this->type= "furniture";
     }
 
-    public function setAttributeFromChild($attributeLst)
-    {
-        $this->height= $attributeLst['height'];
-        $this->width= $attributeLst['width'];
-        $this->length= $attributeLst['length'];
-        $this->setAttribute("{$this->height}x{$this->width}x{$this->length}");
+    public function setAttribute($array){
+        $this->height= $array['height'];
+        $this->width= $array['width'];
+        $this->length= $array['length'];
     }
+    public function getAttribute(){
+        return [
+            "height"=> $this->height,
+            "width"=> $this->width,
+            "length"=> $this->length
+        ];
+    }
+
+
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Core;
+namespace Illuminate;
 
 use PDO;
 use PDOException;

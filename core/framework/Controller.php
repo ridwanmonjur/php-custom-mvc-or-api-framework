@@ -1,6 +1,6 @@
 <?php
 
-namespace Core;
+namespace Illuminate;
 
 class Controller
 {
@@ -8,22 +8,17 @@ class Controller
     {
         require("app/views/$view");
     }
-    public function model($view, ...$modelArgs)
-    {
-        $ucView = ucfirst($view);
-        require_once("app/models/$ucView.php");
-        return new $ucView(...$modelArgs);
-    }
-    static public function index(){
-        (new self)->view("demo.php");
+    
+    public function index(){
+        $this->view("demo.php");
         echo 'This is the default index route'; 
     }
-    static public function create(){
-        (new self)->view("demo.php");
+    public function create(){
+        $this->view("demo.php");
         echo 'This is the default create route'; 
     }
-    static public function destroy(){
-        (new self)->view("demo.php");
+    public function destroy(){
+        $this->view("demo.php");
         echo 'This is the default delete route'; 
     }
 }
