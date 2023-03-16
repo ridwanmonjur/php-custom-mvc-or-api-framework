@@ -1,17 +1,18 @@
+<?php
+session_start();
+$baseUrl = getBaseUrl();
+$count = 0;
+$errors = [];
+$baseUrl = getBaseUrl();
+if (isset($_SESSION["formErrors"])) {
+    $errors = $_SESSION["formErrors"];
+    $count = count($errors);
+}
+?>
 <?php $title = "Add Product" ?>
 <?php require_once(dirname(__FILE__) . "/../layouts/header.php"); ?>
-
 <body>
-    <?php
-    $baseUrl = getBaseUrl();
-    $count = 0;
-    $errors = [];
-    $baseUrl = getBaseUrl();
-    if (isset($_SESSION["formErrors"])) {
-        $errors = $_SESSION["formErrors"];
-        $count = count($errors);
-    }
-    ?>
+
     <nav class="navbar is-warning py-5">
         <div class="navbar-brand px-5 mx-5">
             <a class="navbar-item" href="<?= $baseUrl ?>/addProduct">

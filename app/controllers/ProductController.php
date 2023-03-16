@@ -15,8 +15,6 @@ class ProductController extends Controller
     }
     public function index()
     {
-        session_start();
-
         try {
             // need to initialize because cannot dependency injection.
             $data = $this->productManager->find();
@@ -27,7 +25,6 @@ class ProductController extends Controller
     }
     public function show()
     {
-        session_start();
         $this->view("product/addProduct.php");
     }
     public function create()

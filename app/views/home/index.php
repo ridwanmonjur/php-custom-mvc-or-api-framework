@@ -1,16 +1,18 @@
+<?php
+session_start();
+$errors = [];
+$count = 0;
+$baseUrl = getBaseUrl();
+if (isset($_SESSION["errors"])) {
+    $errors = $_SESSION["errors"];
+}
+$count = count($errors);
+?>
 <?php $title = "Product List" ?>
 <?php require_once realpath(".") . '/app/views/' . 'layouts/header.php'; ?>
 
 <body>
-    <?php
-    $errors = [];
-    $count = 0;
-    $baseUrl = getBaseUrl();
-    if (isset($_SESSION["errors"])) {
-        $errors = $_SESSION["errors"];
-    }
-    $count = count($errors);
-    ?>
+
     <nav class="navbar is-warning py-5">
         <div class="navbar-brand px-5 mx-5">
             <a class="navbar-item" href="<?= $baseUrl ?>">
@@ -70,7 +72,7 @@
                                             <?= $product->getPrice() ?> $
                                         </p>
                                         <p class="">
-                                        <?= $product->getAttribute() ?> 
+                                            <?= $product->getAttribute() ?>
                                         </p>
 
                                     </div>
