@@ -1,16 +1,11 @@
 function validateForms(event) {
     const input = event.target;
     const inputName = input.name;
-    var pattern = /^[a-z\d\-_\s]+$/i;
     const value = input.value;
-    var isValid = pattern.test(String.fromCharCode(value));
     const grandParent = input.parentElement.parentElement;
     const lastGrandChild = grandParent.lastElementChild;
     if (value.trim() == "") {
         lastGrandChild.innerHTML = `<span class="has-text-danger"> Please, a value is required for this field: ${inputName}. </span>`;
-    }
-    else if (!isValid) {
-        lastGrandChild.innerHTML = `<span class="has-text-danger"> Please, submit an alphanumeric number for this field: ${inputName}. </span>`;
     }
     else {
         lastGrandChild.innerHTML = "";
