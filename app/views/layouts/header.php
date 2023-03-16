@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="assets/css/bulma.min.css">
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="assets/css/grid.min.css">
-    <script src="assets/js/mobileNavbar.js"></script>
     <title>
         <?= $title ?>
     </title>

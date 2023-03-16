@@ -1,3 +1,5 @@
+const message = document.getElementById("messageWarning");
+console.log({message});
 function deleteForm(event) {
     event.preventDefault();
     var form = document.getElementById('delete_form');
@@ -11,9 +13,17 @@ function deleteForm(event) {
     }
     if (is_checked) {
         form.submit();
+        if (!message.classList.contains("is-hidden")) {
+            message.classList.add("is-hidden");
+        }
         return true;
     }
-    alert("Error! ");
+    if (message.classList.contains("is-hidden")) {
+        message.classList.remove("is-hidden");
+    }
+   
     return false;
-
 }
+
+
+// Functions to open and close a modal

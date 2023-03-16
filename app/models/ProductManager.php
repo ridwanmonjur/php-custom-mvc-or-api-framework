@@ -43,10 +43,8 @@ class ProductManager
         $model = $this->getProductChild($arrProduct["type"]);
         $model->setAttribute($arrProduct["attribute"]);
         $pre = $arrProduct["attribute"];
-        print_pre_formatted($arrProduct, $pre);
 
         $arrProduct["attribute"] = $model->getAttribute();
-        print_pre_formatted($arrProduct, $pre, $arrProduct["attribute"]);
         $values = implode(',', array_map(function ($x) {
             return "'" . $x . "'";
         }, $arrProduct));

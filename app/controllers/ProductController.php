@@ -27,16 +27,20 @@ class ProductController extends Controller
     {
         $this->view("product/addProduct.php");
     }
+    public function error()
+    {
+        $this->view("error.php");
+    }
     public function create()
     {
-        session_start();
+        // session_start();
         try {
             if (!isset($_POST['switcher'])):
                 throw new \Exception("Product type is not set!");
             endif;
             $validator = new Validator;
             $validation = $validator->validate($_POST, [
-                'sku' => 'required|alpha_num',
+                'sku' => 'required',
                 'name' => 'required',
                 'price' => 'required|numeric|min:0|max:99999',
                 'switcher' => [
@@ -48,13 +52,15 @@ class ProductController extends Controller
                 'attribute' => ['required']
             ]);
             if ($validation->fails()) {
-                $errors = $validation->errors()->all();
-                $_SESSION["formErrors"] = $errors;
-                header("Location: " . getBaseUrl() . "/addProduct");
+                // $errors = $validation->errors()->all();
+                // $_SESSION["formErrors"] = $errors;
+                // header("Location: " . getBaseUrl() . "/addProduct");
+                header("Location: " . getBaseUrl() . "/error");
+
             } else {
-                if (isset($_SESSION["formErrors"])) {
-                    unset($_SESSION["formErrors"]);
-                }
+                // if (isset($_SESSION["formErrors"])) {
+                //     unset($_SESSION["formErrors"]);
+                // }
                 $arrProduct = [
                     "sku" => $_POST["sku"],
                     "name" => $_POST["name"],
@@ -67,13 +73,15 @@ class ProductController extends Controller
                 header("Location: " . getBaseUrl());
             }
         } catch (\Exception $error) {
-            $_SESSION["formErrors"] = [$error->getMessage()];
-            header("Location: " . getBaseUrl() . "/addProduct");
+            // $_SESSION["formErrors"] = [$error->getMessage()];
+            // header("Location: " . getBaseUrl() . "/addProduct");
+            header("Location: " . getBaseUrl() . "/error");
+
         }
     }
     public function destroy()
     {
-        session_start();
+        // session_start();
         try {
             if (isset($_POST['sku'])):
                 $sku = $_POST['sku'];
@@ -82,8 +90,10 @@ class ProductController extends Controller
                 throw new \Exception("Product sku is not selected!");
             endif;
         } catch (\Exception $error) {
-            $_SESSION["errors"] = [$error->getMessage()];
-            header("Location: " . getBaseUrl());
+            // $_SESSION["errors"] = [$error->getMessage()];
+            // header("Location: " . getBaseUrl());
+            header("Location: " . getBaseUrl() . "/error");
+            return;
         }
 
         header("Location: " . getBaseUrl());

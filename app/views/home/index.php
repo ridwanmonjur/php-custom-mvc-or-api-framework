@@ -1,11 +1,11 @@
 <?php
-session_start();
+// session_start();
 $errors = [];
 $count = 0;
 $baseUrl = getBaseUrl();
-if (isset($_SESSION["errors"])) {
-    $errors = $_SESSION["errors"];
-}
+// if (isset($_SESSION["errors"])) {
+//     $errors = $_SESSION["errors"];
+// }
 $count = count($errors);
 ?>
 <?php $title = "Product List" ?>
@@ -37,20 +37,29 @@ $count = count($errors);
     </nav>
     <main id="body">
         <div>
-            <form id="delete_form" action="<?php echo $_SERVER['REQUEST_URI']; ?>deleteProduct" method="POST"
-                class="py-5 mx-5" onsubmit="deleteForm(event);">
+            <form id="delete_form" action="<?php echo $baseUrl; ?>/deleteProduct" method="POST" class="py-5 mx-5"
+                onsubmit="deleteForm(event);">
                 <div class="row py-5 px-5">
-                    <?php if ($count > 0): ?>
+                    <article id="messageWarning" class="message is-danger is-light col-12-sm col-7 is-hidden">
+                        <div class="message-header">
+                            <p>Error</p>
+                            <button class="delete" aria-label="delete"></button>
+                        </div>
+                        <div class="message-body">
+                           You entered no skus to delete. Select a checkbox, please
+                        </div>
+                    </article>
+                    <!-- <?php if ($count > 0): ?>
                         <div class="notification is-danger is-light col-12-sm col-9">
                             <ul>
-                                <?php foreach ($errors as $error): ?>
+                                                    <?php foreach ($errors as $error): ?>
                                     <li>
-                                        <?= $error ?>
+                                                                                <?= $error ?>
                                     </li>
-                                <?php endforeach; ?>
+                                                    <?php endforeach; ?>
                             </ul>
                         </div>
-                    <?php endif; ?>
+                    <?php endif; ?> -->
 
                     <?php foreach ($data as $index => $product): ?>
 
@@ -85,9 +94,8 @@ $count = count($errors);
                     class="button are-large is-info is-hidden-desktop is-block-touch my-5 mx-5 has-text-centered">MASS
                     DELETE
                 </button>
-            </form>
         </div>
     </main>
-    <!-- <script src="assets/js/deleteForm.js"> </script> -->
+    <script src="assets/js/deleteForm.js"> </script>
     <?php require_once realpath(".") . '/app/views/' . 'layouts/footer.php'; ?>
-    <?php require_once realpath(".") . '/app/views/' . 'layouts/session.php'; ?>
+    <!-- <?php require_once realpath(".") . '/app/views/' . 'layouts/session.php'; ?> -->

@@ -1,16 +1,17 @@
 <?php
-session_start();
+// session_start();
 $baseUrl = getBaseUrl();
 $count = 0;
 $errors = [];
 $baseUrl = getBaseUrl();
-if (isset($_SESSION["formErrors"])) {
-    $errors = $_SESSION["formErrors"];
-    $count = count($errors);
-}
+// if (isset($_SESSION["formErrors"])) {
+//     $errors = $_SESSION["formErrors"];
+//     $count = count($errors);
+// }
 ?>
 <?php $title = "Add Product" ?>
 <?php require_once(dirname(__FILE__) . "/../layouts/header.php"); ?>
+
 <body>
 
     <nav class="navbar is-warning py-5">
@@ -52,24 +53,27 @@ if (isset($_SESSION["formErrors"])) {
                 <?php endif; ?>
                 <label class="col-12-sm col-3 label-fix" for="sku">SKU</label>
                 <div class="col-12-sm col-4">
-                    <input class="input" type="text" name="sku" id="sku" pattern="[a-zA-Z0-9\s]+"
+                    <input class="input" type="text" name="sku" id="sku" 
                         placeholder="Please provide sku." required title="Please provide sku as alphanumeric." ">
                 </div>
+                <div class="col-7"> </div>
             </div>
             <div class=" row">
                     <label class="col-12-sm col-3 label-fix" for="name">Name</label>
                     <div class="col-12-sm col-4">
-                        <input class="input" type="text" pattern="[a-zA-Z0-9\s]+" name="name" id="name"
+                        <input class="input" type="text" name="name" id="name"
                             onblur="validateForms(event);" placeholder="Please provide name." required>
                     </div>
+                    <div class="col-7"> </div>
                 </div>
                 <div class="row">
                     <label class="col-12-sm col-3 label-fix" for="price">Price ($)</label>
                     <div class="col-12-sm col-4">
-                        <input class="input" type="number" min="0" name="price" id="price"
-                            onblur="validateForms(event);" placeholder="Insert any non-negative number for the price."
-                            required>
+                        <input class="input" name="price" id="price"
+                            onblur="validateFormNumbers(event);"
+                            placeholder="Insert any non-negative number for the price." required>
                     </div>
+                    <div class="col-7"> </div>
                 </div>
                 <div class="row">
                     <label class="col-12-sm col-3 label-fix" for="switcher">Type Switcher</label>
@@ -95,4 +99,4 @@ if (isset($_SESSION["formErrors"])) {
     <script src="assets/js/switchForm.js"> </script>
     <script src="assets/js/validateForm.js"> </script>
     <?php require_once(dirname(__FILE__) . "/../layouts/footer.php"); ?>
-    <?php require_once(dirname(__FILE__) . "/../layouts/session.php"); ?>
+    <!-- <?php require_once(dirname(__FILE__) . "/../layouts/session.php"); ?> -->

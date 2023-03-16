@@ -3,5 +3,6 @@
         Test task Scandiweb Junior Backend © 2023 RIDWAN BIN MONJUR
     </div>
 </footer>
+<script src="assets/js/mobileNavbar.js"></script>
 
 </body>

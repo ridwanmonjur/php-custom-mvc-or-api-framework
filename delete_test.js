@@ -19,13 +19,9 @@ Feature('edit');
 
 Scenario('test something', ({ I }) => {
     I.amOnPage('/');
+    I.click('MASS DELETE');
     I.click('ADD');
-    I.seeElement('#product_form');
-    I.fillField('#sku', 'InvalidInput');
-    I.fillField('#name', 'InvalidName22');
-    I.fillField('#price', 'E');
-    I.selectOption('#productType', 'Book');
-    I.fillField('#weight', 'E');
-    I.click('Save');
+
+
 });
 

@@ -9,6 +9,7 @@ $router = new Router();
 try{
     $router->get('/', 'ProductController@index');
     $router->post('/', 'ProductController@create');
+    $router->get('/error', 'ProductController@error');
     $router->post('/deleteProduct', 'ProductController@destroy');
     $router->get('/addProduct', 'ProductController@show');
     $router->get('/reset', 'ProductController@reset');
