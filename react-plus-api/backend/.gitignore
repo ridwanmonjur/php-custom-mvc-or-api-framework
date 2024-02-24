@@ -1,0 +1,8 @@
+node_modules
+vendor
+/package.json
+/package-lock.json
+/jsconfig.json
+output
+000webhost.env.free
+.txt

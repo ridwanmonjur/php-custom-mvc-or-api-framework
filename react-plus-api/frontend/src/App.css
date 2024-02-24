@@ -1,0 +1,22 @@
+@import 'bulma/css/bulma.css';
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+label.label-fix{
+    font-size: 18px; 
+    margin-top: 15px;
+    color: black !important;
+    margin-left: 15px;
+}
+
+.is-no-opacity{
+    opacity: 0 !important;
+}
